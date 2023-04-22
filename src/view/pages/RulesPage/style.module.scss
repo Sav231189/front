@@ -1,0 +1,22 @@
+.RulesPage {
+  min-height: calc(100vh - 80px);
+  .container {
+    max-width: 1470px;
+    margin: 0 auto;
+    padding: 0 15px;
+    .main {
+      padding: 40px 0;
+      .titlePage {
+        margin-top: 10px;
+        font-weight: 700;
+        font-size: 48px;
+        padding: 10px 0;
+      }
+      p {
+        margin-top: 20px;
+        font-size: 18px;
+        line-height: 22px;
+      }
+    }
+  }
+}

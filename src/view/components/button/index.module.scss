@@ -1,0 +1,49 @@
+.Button {
+  display: inline-flex;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: var(--primaryOpacityBtn);
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--primaryTextColor);
+  white-space: pre-wrap;
+  span {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  &:hover {
+    background-color: var(--hoverBtn);
+  }
+  &.noRadius {
+    border-radius: 0;
+  }
+  &.maxWidth {
+    width: 100%;
+  }
+  &.red {
+    background-color: var(--secondColor);
+    &:hover {
+      background-color: var(--hoveSecondColor);
+    }
+  }
+  &.uppercase {
+    text-transform: uppercase;
+  }
+  &.mobilSmall {
+    @media screen and (max-width: 767px) {
+      padding: 10px 10px;
+      span {
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+    @media screen and (max-width: 350px) {
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,121 @@
+.BestsellerItem {
+  position: relative;
+  max-width: 340px;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform .2s;
+  &:hover {
+    transform: translateY(-10px);
+    .isEditable {
+      display: flex;
+    }
+  }
+  .imgBox {
+    width: 100%;
+    //max-height: 400px;
+    max-width: calc(50vw - 30px);
+    max-height: 320px;
+    //max-width: calc(50vw - 30px);
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: var(--invertedPrimaryBg);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media screen and (max-width: 767px) {
+      max-height: calc(50vw - 50px);
+    }
+    @media screen and (max-width: 540px) {
+      max-height: calc(50vw - 40px);
+    }
+  }
+  .title {
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--primaryTextColor);
+  }
+  .text {
+    margin-top: 6px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(241, 241, 241, 0.64);
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+  }
+  .tegList {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    span {
+      font-size: 12px;
+      line-height: 1.2;
+      color: rgba(241, 241, 241, 0.32);
+    }
+  }
+  .price {
+    margin-top: 12px;
+    font-size: 24px;
+    color: var(--primaryTextColor);
+    font-weight: 700;
+  }
+  .status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--primaryBg);
+    padding: 7px 10px;
+    border-radius: 5px;
+    .soon {
+      color: #F0F40C;
+    }
+    .work {
+      color: #75E043;
+    }
+    .finish {
+      color: #FA7067;
+    }
+  }
+  .isEditable {
+    display: none;
+    background-color: var(--opacityBlackColor);
+    backdrop-filter: blur(3px);
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+    border-radius: 10px;
+    padding: 40px 20px 20px;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+  }
+  @media screen and (max-width: 767px) {
+    max-width: calc(50vw - 30px);
+  }
+  @media screen and (max-width: 540px) {
+    max-width: calc(50vw - 20px);
+    .title {
+      font-size: 16px;
+    }
+    .price {
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.PositionBtn {
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--primaryBtn);
+  overflow: hidden;
+  .title {
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid var(--hoverBtn);
+  }
+  .btnBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 40px;
+    .prevBtn,.nextBtn {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      &:hover {
+        background-color: var(--hoverBtn);
+      }
+    }
+    .nextBtn {
+      border-left: 1px solid var(--hoverBtn);
+    }
+  }
+}

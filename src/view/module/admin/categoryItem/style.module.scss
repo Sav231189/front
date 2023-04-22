@@ -1,0 +1,98 @@
+.CategoryItem {
+
+  margin-top: 20px;
+
+  border: solid 1px var(--primaryBtn);
+  border-radius: 5px;
+  overflow: hidden;
+
+  .main {
+    //height: 100px;
+    margin: 15px;
+    .mainTop {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      .name {
+        margin-top: 5px;
+        font-size: 24px;
+      }
+      .changeBtn {
+        width: 220px;
+      }
+    }
+    .description {
+      margin-top: 15px;
+      line-height: 1.4;
+      max-height: 60px;
+      overflow: hidden;
+    }
+  }
+
+  .taskList {
+
+    .listHeader {
+      background-color: var(--primaryBtn);
+      padding: 0 15px;
+      height: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--litePrimaryBg);;
+      svg {
+        fill: var(--litePrimaryBg);
+        width: 20px;
+        height: 20px;
+
+      }
+      &:hover {
+        color: var(--thirdPrimaryBtn);;
+        svg {
+          fill: var(--thirdPrimaryBtn);
+        }
+      }
+      &.active {
+        color: var(--thirdPrimaryBtn);
+        svg {
+          fill: var(--thirdPrimaryBtn);
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .list {
+      .taskItem {
+        border-bottom: 1px solid (var(--opacityBlackColor));
+        min-height: 40px;
+        padding: 0 0 0 15px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        .name {
+          margin-top: 10px;
+        }
+        .changeBtn {
+          margin: 10px 10px 0;
+          cursor: pointer;
+          color: var(--grayColor);
+          &:hover {
+            color: var(--primaryTextColor);
+            text-decoration: underline;
+          }
+        }
+        &:hover {
+          background-color: (var(--primaryOpacityBtn));
+        }
+      }
+      .addBtnBox {
+        width: 300px;
+        margin: 0 auto;
+        padding: 15px;
+      }
+    }
+  }
+
+  &:hover {
+    //border: solid 1px var(--primaryBtn);
+  }
+}

@@ -1,0 +1,55 @@
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.BurgerPopup {
+  width: 100%;
+  background-color: var(--primaryBg);
+  animation: show .1s linear 0s;
+  box-shadow: 0px 0px 5px 0px var(--hoverBtn);
+  border-radius: 8px;
+  padding: 25px 25px;
+  margin-bottom: 20px;
+  height: calc(100%);
+  @media screen and (max-width: 450px) {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 10px 10px;
+
+  }
+  .popupHeader {
+    padding: 0 0 20px 10px;
+    .title {
+      font-weight: 700;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+  }
+  .profileNav {
+    border-top: 1px solid var(--hoverBtn);
+    .navItem {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 15px 10px;
+      font-size: 14px;
+      line-height: 17px;
+      color: var(--primaryTextColor);
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      .key {
+      }
+
+      &:hover {
+        background-color: var(--hoverBtn);
+      }
+    }
+  }
+}

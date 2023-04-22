@@ -1,0 +1,26 @@
+.TournamentPartners {
+
+  padding: 20px 0;
+  .title {
+    font-weight: 700;
+    font-size: 48px;
+
+  }
+  .list {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .partnerItem {
+      height: 280px;
+      width: 280px;
+      min-height: 150px;
+      min-width: 150px;
+      background-color: var(--grayColor);
+      @media screen and (max-width: 1500px){
+        height: calc(19vw - 5px);
+        width: calc(19vw - 5px);
+      }
+    }
+  }
+}

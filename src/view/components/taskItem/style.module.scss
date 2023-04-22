@@ -1,0 +1,82 @@
+.TaskItem {
+  margin-top: 20px;
+  background: var(--primaryOpacityBtn);
+  border: 1px solid #F5F5F5;
+  border-radius: 8px;
+  padding: 25px 35px;
+  .title {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    .name {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: 700;
+      font-size: 48px;
+    }
+    .status {
+      margin-top: 5px;
+      font-size: 18px;
+    }
+  }
+  .moreBtn {
+    margin-top: 10px;
+  }
+  .main {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 20px;
+    .resultBox {
+      max-width: 500px;
+      .link {
+        label {
+          display: grid;
+          grid-template-columns: 1fr;
+          row-gap: 10px;
+          cursor: pointer;
+          span {
+            color: var(--grayColor);
+          }
+          input {
+            background-color: var(--invertedPrimaryBg);
+            height: 40px;
+            padding-left: 10px;
+          }
+        }
+      }
+      .result {
+        margin-top: 30px;
+      }
+    }
+    .btnBox {
+      align-self: end;
+      min-width: 300px;
+      max-width: 400px;
+    }
+  }
+  &.await {
+    border: 1px solid gray;
+    .title {
+      .status {
+        color: gray;
+      }
+    }
+  }
+  &.access {
+    border: 1px solid green;
+    .title {
+      .status {
+        color: green;
+      }
+    }
+  }
+  &.reject {
+    border: 1px solid red;
+    .title {
+      .status {
+        color: red;
+      }
+    }
+  }
+}

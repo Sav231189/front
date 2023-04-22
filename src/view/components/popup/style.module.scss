@@ -1,0 +1,39 @@
+.Popup {
+  position: fixed;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.73);
+  backdrop-filter: blur(3px);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  padding: 50px 50px 15px 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+  .main {
+    //width: 100%;
+    //max-width: 80%;
+    min-width: 300px;
+    position: relative;
+    //padding: 35px;
+    background-color: var(--light_primary);
+    border-radius: 10px;
+    .closeBtn {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      cursor: pointer;
+      &:hover {
+        svg path{
+          fill: #cccccc;
+        }
+      }
+    }
+  }
+}

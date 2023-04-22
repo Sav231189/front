@@ -1,0 +1,104 @@
+@keyframes topShow {
+  0% {
+    left: -100vw;
+  }
+  100% {
+    left: 0;
+  }
+}
+.ProfileButton {
+  position: relative;
+  .btnMain {
+    max-width: 200px;
+    .burger {
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 15px 0;
+      cursor: pointer;
+
+      div {
+        width: 100%;
+        height: 2px;
+        background-color: white;
+      }
+      @media screen and (max-width: 767px) {
+        width: 40px;
+      }
+    }
+    &.showPopup {
+      .burger {
+        overflow: hidden;
+        div {
+          position: relative;
+          transition: all .3s linear 0s;
+          &:nth-child(1) {
+            //left: 10px;
+            top: 9px;
+            width: 64px;
+            transform: rotate(45deg);
+          }
+          &:nth-child(3) {
+            bottom: 9px;
+            width: 64px;
+            transform: rotate(-45deg);
+          }
+          &:nth-child(2) {
+            left: -100%;
+          }
+          @media screen and (max-width: 767px) {
+            &:nth-child(1) {
+              //left: 10px;
+              top: 9px;
+              width: 40px;
+              transform: rotate(45deg);
+            }
+            &:nth-child(3) {
+              bottom: 9px;
+              width: 40px;
+              transform: rotate(-45deg);
+            }
+            &:nth-child(2) {
+              left: -100%;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1350px) {
+      width: 200px;
+    }
+    @media screen and (max-width: 767px) {
+      width: 80px;
+      .btn {
+        column-gap: 0px;
+        padding: 8px;
+      }
+    }
+  }
+  .popupBox {
+    position: absolute;
+    width: 400px;
+    top: 65px;
+    left: 0;
+    transition: top .5s linear 0s;
+    @media screen and (max-width: 450px) {
+      position: absolute;
+      z-index: -10;
+      width: calc(100%);
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+      top: -100vh;
+      animation: topShow .3s linear 0s;
+      background-color: var(--primaryBg);
+    }
+    &.showPopup {
+      top: 70px;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    position: static;
+  }
+}

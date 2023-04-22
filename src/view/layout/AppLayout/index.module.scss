@@ -1,0 +1,11 @@
+.AppLayout {
+  //position: relative;
+  background-color: var(--primaryBg);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  //height: 100vh;
+  //overflow-y: auto;
+  //overflow-x: hidden;
+  //color: var(--primaryTextColor);
+}

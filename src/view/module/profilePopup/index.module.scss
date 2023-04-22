@@ -1,0 +1,144 @@
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.ProfilePopup {
+  width: 100%;
+  background-color: var(--primaryBg);
+  animation: show .1s linear 0s;
+  box-shadow: 0px 0px 5px 0px var(--hoverBtn);
+  border-radius: 8px;
+  padding: 25px 25px;
+  margin-bottom: 20px;
+  height: calc(100%);
+  @media screen and (max-width: 450px) {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 10px 10px;
+    //overflow-y: auto;
+    //max-height: calc(100vh - 70px);
+  }
+
+  .popupHeader {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 25px;
+
+    .iconImgBox {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #424242;
+    }
+
+    .fullName {
+      align-self: center;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 29px;
+      text-transform: uppercase;
+
+      .lastName {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .firstName {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .info,.admin {
+    margin-top: 30px;
+
+    .infoItem {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 10px;
+      border-top: 1px solid var(--hoverBtn);
+      font-size: 14px;
+      line-height: 17px;
+      color: var(--primaryTextColor);
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      .key {
+      }
+
+      .value {
+      }
+
+      &:last-child {
+        border-bottom: 1px solid var(--hoverBtn);
+      }
+
+      &:hover {
+        background-color: var(--hoverBtn);
+      }
+    }
+  }
+  .admin {
+    margin-top: 30px;
+  }
+
+  .journal {
+    margin: 20px 0;
+  }
+
+  .profileNav {
+    .navItem {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 10px;
+      border-top: 1px solid var(--hoverBtn);
+      font-size: 14px;
+      line-height: 17px;
+      color: var(--primaryTextColor);
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      .key {
+      }
+
+      &:last-child {
+        border-bottom: 1px solid var(--hoverBtn);
+      }
+
+      &:hover {
+        background-color: var(--hoverBtn);
+      }
+    }
+  }
+
+  .popupFooter {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0;
+    .footerBtn {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 160%;
+      text-decoration-line: underline;
+      color: var(--thirdPrimaryBtn);
+      cursor: pointer;
+      margin-bottom: 10px;
+      &:hover {
+        color: var(--primaryTextColor);
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.InputText {
+  .title {
+    color: var(--thirdPrimaryBtn);
+  }
+  .input {
+    margin-top: 10px;
+    height: 40px;
+    background-color: var(--invertedPrimaryBg);
+    padding-left: 10px;
+
+    &::placeholder {
+      text-transform: uppercase;
+    }
+    &:focus::placeholder {
+      color: transparent;
+    }
+    &.maxWidth {
+      width: 100%;
+    }
+  }
+}
+
