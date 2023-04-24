@@ -28,6 +28,16 @@ export const router = createBrowserRouter([
         errorElement: <Navigate to={`/`} />,
         children: [
             {
+                path: "profile",
+                element: <IsRequireHOC
+                    permissionRoles={['regular','admin']}
+                    permissionElement={<Navigate to={'/'} replace={true}/>}
+                >
+                    <ProfilePage />
+                </IsRequireHOC>,
+                errorElement: <Navigate to={`/`} />,
+            },
+            {
                 path: "tournament",
                 element: <IsRequireHOC permissionRoles={['regular', 'guest', 'admin']}>
                     <TournamentLayout />
@@ -123,20 +133,10 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "",
-                        element: <Navigate to={`user`} />,
+                        element: <Navigate to={`tournament`} />,
                         errorElement: <Navigate to={`/`} />,
                     },
                 ]
-            },
-            {
-                path: "profile",
-                element: <IsRequireHOC
-                    permissionRoles={['regular','admin']}
-                    permissionElement={<Navigate to={'/'} replace={true}/>}
-                >
-                    <ProfilePage />
-                </IsRequireHOC>,
-                errorElement: <Navigate to={`/`} />,
             },
             {
                 path: "",

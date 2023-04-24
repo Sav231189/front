@@ -6,7 +6,11 @@ import {useAuth} from "store/auth/hook/useAuth";
 import {useThunks} from "lib/reduxHook";
 import {authThunk} from "store/auth/thunk/authThunk";
 
-export const ProfilePopup = () => {
+type PropsType = {
+    closePopup: Function
+}
+export const ProfilePopup = (props: PropsType) => {
+    const {closePopup} = props
     const navigate = useNavigate()
 
     const user = useAuth()
@@ -14,6 +18,10 @@ export const ProfilePopup = () => {
     const {logout} = useThunks(authThunk)
     const logoutHandler = () => {
         logout()
+    }
+    const navigateHandler = (path: string) => {
+        closePopup()
+        navigate(path)
     }
 
     return (
@@ -29,7 +37,7 @@ export const ProfilePopup = () => {
             </div>
             <div className={css(s.info)}>
                 <div className={css(s.infoItem)}>
-                    <div className={css(s.key)} onClick={() => navigate(`profile`)}>Профиль</div>
+                    <div className={css(s.key)} onClick={() => navigateHandler(`profile`)}>Профиль</div>
                 </div>
                 <div className={css(s.infoItem)}>
                     <div className={css(s.key)}>Мои турниры</div>
@@ -37,7 +45,7 @@ export const ProfilePopup = () => {
             </div>
             {user?.role.includes('admin') &&
                 <div className={css(s.admin)}>
-                    <Button modes={[`maxWidth`, 'uppercase', `noRadius`]} text={`Панель администратора`} click={() => navigate(`admin`)}/>
+                    <Button modes={[`maxWidth`, 'uppercase', `noRadius`]} text={`Панель администратора`} click={() => navigateHandler(`admin`)}/>
                 </div>
             }
             {/*<div className={css(s.journal)}>*/}

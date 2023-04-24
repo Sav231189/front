@@ -49,7 +49,7 @@ export const ProfileButton = (props: PropsType) => {
                     </div>
                 </div>
             </div>
-            {showPopup && <div className={css(s.popupBox, showPopup && s.showPopup)}><ProfilePopup /></div>}
+            {showPopup && <div className={css(s.popupBox, showPopup && s.showPopup)}><ProfilePopup closePopup={()=>setShowPopup(false)}/></div>}
         </div>
     );
 };

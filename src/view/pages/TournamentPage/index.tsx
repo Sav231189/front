@@ -19,8 +19,8 @@ export const TournamentPage = () => {
             <div className={css(s.container)}>
                 <TournamentHead tournament={tournament}/>
                 <TournamentTable />
-                <TournamentDescription text={tournament.text}/>
-                <TournamentPartners tournamentId={tournament.id}/>
+                <TournamentDescription text={tournament.descriptionSmall}/>
+                {tournament.id && <TournamentPartners tournamentId={tournament.id}/>}
             </div>
         </div>
     );

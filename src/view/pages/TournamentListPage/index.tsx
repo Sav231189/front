@@ -40,7 +40,7 @@ export const TournamentListPage = () => {
                         <TournamentItem key={index} item={item}/>
                     )}
                 </div>
-                {tournamentList !== null &&
+                {tournamentList !== null && tournamentList.length >= 12 &&
                     <div className={css(s.btnBox)}>
                         <Button text={'показать больше'} modes={[`uppercase`, 'maxWidth', `mobilSmall`]}/>
                     </div>}

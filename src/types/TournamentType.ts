@@ -1,12 +1,18 @@
 
 export type TournamentType = {
-    id: number,
-    img: any,
-    title: string,
-    text: string,
-    status: number,
+    id?: number,
+    img: string,
+    name: string,
+    descriptionSmall: string,
+    description: string,
+    startDate: string,
+    status: string,
+    prize: string,
+    rules: string,
     isOnline: boolean,
-    date: string,
+    isHidden: boolean,
+    isShowTable: boolean,
+
     isPaidMe: boolean,
     categoryId?: number
 }

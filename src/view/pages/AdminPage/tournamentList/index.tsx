@@ -44,7 +44,7 @@ export const AdminTournamentList = () => {
                         <TournamentItem key={item.id} item={item} isEditable={true}/>
                     )}
                 </div>
-                {tournamentList !== null &&
+                {tournamentList !== null && tournamentList.length >= 12 &&
                     <div className={css(s.btnBox)}>
                         <Button text={'показать больше'} modes={[`uppercase`, 'maxWidth', `mobilSmall`]}/>
                     </div>}

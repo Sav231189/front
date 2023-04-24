@@ -31,7 +31,7 @@ export const TournamentHead = (props: PropsType) => {
                     </div>
                     <div className={css(s.smallInfo)}>
                         <div className={css(s.date)}>
-                            {tournament.date}
+                            {tournament.startDate}
                         </div>
                         <div className={css(s.isOnline)}>
                             {tournament.isOnline ? <span className={css(s.true)}>ONLINE</span> :

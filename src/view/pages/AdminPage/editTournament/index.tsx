@@ -6,26 +6,100 @@ import loadGif from "view/assets/images/Load.gif";
 import {InputText} from "view/components/InputText";
 import {Button} from "view/components/button";
 import {RadioButton} from "view/components/RadioButton";
+import {TournamentType} from "types/TournamentType";
+import {useSelector} from "react-redux";
+import {getEditTournamentSelector} from "store/tournament/selector/getEditTournament";
+import {useActions, useThunks} from "lib/reduxHook";
+import {TournamentActions} from "store/tournament/reducer/tournamentReducer";
+import {tournamentThunk} from "store/tournament/thunk/tournamentThunk";
+import tournament_item from "view/assets/images/tounamentItem/tournament_item.png";
+import {getNewLogoTournamentSelector} from "store/tournament/selector/getNewLogoTournament";
 
 export const EditTournament = () => {
     const {id} = useParams()
 
     const navigate = useNavigate()
 
+    const editTournament = useSelector(getEditTournamentSelector)
+
+    const newLogoTournament = useSelector(getNewLogoTournamentSelector)
+
     const [isNew, setIsNew] = useState<boolean | null>(null)
-    const [tournament, setTournament] = useState<any>(null)
+
+    const {setEditTournamentAction, setNewLogoAction} = useActions(TournamentActions)
+
+    const {getTournamentItem, createTournamentItem} = useThunks(tournamentThunk)
 
     useEffect(() => {
         if (!id) {
-            setTournament({title: `new`})
+            setEditTournamentAction({
+                img: '',
+                name: '',
+                descriptionSmall: '',
+                startDate: '',
+                isOnline: false,
+                isHidden: false,
+                isShowTable: false,
+                status: 'Скоро старт',
+                description: '',
+                prize: '',
+                rules: '',
+                isPaidMe: false,
+            })
             setIsNew(true)
         } else {
-            setTournament({title: `editable`})
+            getTournamentItem(Number(id))
             setIsNew(false)
         }
     }, [])
 
-    if (isNew === null) {
+    const changeFieldHandler = <T extends keyof TournamentType>(field: T, value: T | string) => {
+        if (!editTournament) return;
+        switch (field) {
+            case 'name':
+                setEditTournamentAction({...editTournament, name: value})
+                break
+            case 'descriptionSmall':
+                setEditTournamentAction({...editTournament, descriptionSmall: value})
+                break
+            case 'startDate':
+                setEditTournamentAction({...editTournament, startDate: value})
+                break
+            case 'isOnline':
+                setEditTournamentAction({...editTournament, isOnline: value === `Online`})
+                break
+            case 'isHidden':
+                setEditTournamentAction({...editTournament, isHidden: value === `Не виден в каталоге турниров`})
+                break
+            case 'isShowTable':
+                setEditTournamentAction({...editTournament, isShowTable: value === `Доступна`})
+                break
+            case 'status':
+                setEditTournamentAction({...editTournament, status: value})
+                break
+            case 'description':
+                setEditTournamentAction({...editTournament, description: value})
+                break
+            case 'prize':
+                setEditTournamentAction({...editTournament, prize: value})
+                break
+            case 'rules':
+                setEditTournamentAction({...editTournament, rules: value})
+                break
+            default: return
+        }
+    }
+
+    const createTournamentHandler = () => {
+        createTournamentItem()
+    }
+    const changeLogoFilesHandler = (e:any) => {
+        if (e.target.files && e.target.files[0]) {
+            setNewLogoAction(e.target.files[0]);
+        }
+    }
+
+    if (isNew === null || !editTournament) {
         return <div className={css(s.loadingList)}>
             <img src={loadGif} alt="load"/>
             <span>Загрузка...</span>
@@ -40,24 +114,30 @@ export const EditTournament = () => {
             <div className={css(s.main)}>
                 <div className={css(s.form)}>
                     {!isNew && <Button text={`Редактировать категории    →`} modes={[`maxWidth`, `noRadius`]} click={()=>navigate(`/admin/category-list/${id}`)}/>}
-                    <InputText title={`Название турнира`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
-                    <InputText title={`Описание турнира`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
-                    <InputText title={`Дата проведения`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
-                    <RadioButton title={`Тип турнира`} value={``} list={[`Online`,`Offline`]}/>
-                    <RadioButton title={`Видимость`} value={``} list={[`Не виден в каталоге турниров`,`Виден в каталоге турниров`]}/>
-                    <RadioButton title={`Турнирная таблица`} value={``} list={[`Не доступна`,`Доступна`]}/>
-                    <RadioButton title={`Выборка`} value={``} list={[`Сейчас идет`,`Скоро старт`,`Завершен, ждет проверки`,`Завершен`]}/>
-                    <InputText title={`Описание турнира`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
-                    <InputText title={`Призы`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
-                    <InputText title={`Правила`} value={``} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <InputText title={`Название турнира`} value={editTournament.name} change={str => changeFieldHandler('name', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <InputText title={`Описание турнира`} value={editTournament.descriptionSmall} change={str => changeFieldHandler('descriptionSmall', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <InputText title={`Дата проведения`} value={editTournament.startDate} change={str => changeFieldHandler('startDate', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <RadioButton title={`Тип турнира`} value={editTournament.isOnline ?`Online`:`Offline`} change={str => changeFieldHandler('isOnline', str)} list={[`Offline`,`Online`]}/>
+                    <RadioButton title={`Видимость`} value={editTournament.isHidden ? `Не виден в каталоге турниров`:`Виден в каталоге турниров`} change={str => changeFieldHandler('isHidden', str)} list={[`Виден в каталоге турниров`,`Не виден в каталоге турниров`]}/>
+                    <RadioButton title={`Турнирная таблица`} value={editTournament.isShowTable ? `Доступна`:`Не доступна`} change={str => changeFieldHandler('isShowTable', str)} list={[`Не доступна`,`Доступна`]}/>
+                    <RadioButton title={`Выборка`} value={editTournament.status} change={str => changeFieldHandler('status', str)} list={[`Сейчас идет`,`Скоро старт`,`Завершен, ждет проверки`,`Завершен`]}/>
+                    <InputText title={`Описание турнира`} value={editTournament.description} change={str => changeFieldHandler('description', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <InputText title={`Призы`} value={editTournament.prize} change={str => changeFieldHandler('prize', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
+                    <InputText title={`Правила`}  value={editTournament.rules}change={str => changeFieldHandler('rules', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <div className={css(s.btnBox)}>
-                        <Button text={`${isNew ? `Создать`:`Сохранить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]}/>
-
+                        <Button text={`${isNew ? `Создать`:`Сохранить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={createTournamentHandler}/>
                     </div>
                 </div>
                 <div className={css(s.avatar)}>
-                    <div className={css(s.imgBox)}></div>
-                    <Button text={`редактировать`}/>
+                    <div className={css(s.imgBox)}>
+                        {newLogoTournament === null && editTournament.img === '' && <img src={tournament_item} alt="tournament_item" />}
+                        {newLogoTournament !== null && <img src={`${newLogoTournament}`} alt="tournament_item" />}
+                    </div>
+                    <label className={css(s.changeFile)}>
+                        <div className={css(s.fileName)}> редактировать</div>
+                        <input className={css(s.inputLogo)} type="file" accept={'.png'} multiple={false} onChange={changeLogoFilesHandler}/>
+                    </label>
+                    {/*<Button text={`редактировать`}/>*/}
                 </div>
             </div>
         </div>

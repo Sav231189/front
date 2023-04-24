@@ -1,108 +1,83 @@
 import {AppDispatch, RootState} from "store/ReduxStore";
-import img_1 from "view/assets/images/tounamentItem/img_1.png";
-import img_2 from "view/assets/images/tounamentItem/img_2.png";
-import tournament_item from "view/assets/images/tounamentItem/tournament_item.png";
+
 import {TournamentActions} from "store/tournament/reducer/tournamentReducer";
+import {serverHttp} from "config/api/api";
+import {ACCESS_TOKEN, REFRESH_TOKEN} from "config/constants";
+import {authFetch} from "lib/authFetch";
+import {authThunk} from "store/auth/thunk/authThunk";
 
-const TournamentList = [
-    {
-        id: 1,
-        img: tournament_item,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 1,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-    {
-        id: 2,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 2,
-        isOnline: false,
-        date: `12.04-18.04`,
-        isPaidMe: true,
-    },
-    {
-        id: 3,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 2,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: true,
-    },
-    {
-        id: 4,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 2,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-    {
-        id: 5,
-        img: img_2,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 2,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-    {
-        id: 6,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 2,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-    {
-        id: 7,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 3,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-    {
-        id: 8,
-        img: img_1,
-        title: `Fanatic team camp`,
-        text: `Онлайн-курс полноформатных домашних тренировок с заботой о женском здоровье, суставах и мышцах!`,
-        tagList: [`#Кроссфит`, `#Тег2`, `#Тег3`],
-        status: 1,
-        isOnline: true,
-        date: `12.04-18.04`,
-        isPaidMe: false,
-    },
-]
+
 export const tournamentThunk = {
-
     getList: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
             await new Promise((resolve) => {
                 setTimeout(resolve, 1000)
             })
 
-            dispatch(TournamentActions.setTournamentListAction(TournamentList))
+            dispatch(TournamentActions.setTournamentListAction([]))
+
+        } catch (error: any) {
+            console.log('error client', error)
+        } finally {
+            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
+        }
+    },
+    getTournamentItem: (id: number) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000)
+            })
+
+        } catch (error: any) {
+            console.log('error client', error)
+        } finally {
+            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
+        }
+    },
+    createTournamentItem: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+        try {
+            const newTournament = getState().TournamentReducer.editTournament
+            if (!newTournament) return
+
+            const newLogo = getState().TournamentReducer.newLogo
+
+            // console.log(newTournament)
+
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000)
+            })
+
+            let formData = new FormData();
+
+            for (let field in newTournament) {
+                console.log(`${field}`, newTournament[field])
+                formData.append(`${field}`, newTournament[field])
+            }
+
+            if (!!newLogo) {
+                console.log(newLogo)
+                formData.append(`files`, newLogo)
+            }
+
+
+            // @ts-ignore
+            // for(let [name, value] of formData) {
+                // console.log(`${name} = ${value}`) // key1=value1, потом key2=value2
+            // }
+
+            const response = await authFetch(() => dispatch(authThunk.checkAuth()))
+            (`${serverHttp}/api/tournament/create`, {
+                method: `POST`,
+                // headers: {
+                //     'Content-Type': 'multipart/form-data; boundary=',
+                // },
+                body: formData
+            })
+            // const data = await response.json()
+            // if (data.error) {
+            //     console.log(data.message)
+            //     return
+            // }
 
         } catch (error: any) {
             console.log('error client', error)

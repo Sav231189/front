@@ -34,23 +34,19 @@ export const TournamentItem = (props: PropsType) => {
             <div className={css(s.imgBox)}>
                 <img src={item.img} alt="img"/>
             </div>
-            <div className={css(s.title)}>{item.title}</div>
-            <div className={css(s.text)}>{item.text}</div>
+            <div className={css(s.title)}>{item.name}</div>
+            <div className={css(s.text)}>{item.descriptionSmall}</div>
             <div className={css(s.status)}>
-                {(()=>{
-                    switch (item.status) {
-                        case 1: return <span className={css(s.soon)}>скоро старт</span>
-                        case 2: return <span className={css(s.work)}>сейчас идет</span>
-                        case 3: return <span className={css(s.finish)}>закончен</span>
-                        default: return null
-                    }
-                })()}
+                {<span className={css(s.soon)}>{item.status}</span>}
             </div>
-            {isEditable && <div className={css(s.isEditable)} onClick={e=>e.stopPropagation()}>
-                <Button text={`Редактировать турнир`} modes={[`maxWidth`,`mobilSmall`,`red`]} click={openAdminTournamentHandler}/>
-                <Button text={`Редактировать категории`} modes={[`maxWidth`,`mobilSmall`,`red`]} click={openAdminCategoryHandler}/>
+            {isEditable && <div className={css(s.isEditable)} onClick={e => e.stopPropagation()}>
+                <Button text={`Редактировать турнир`} modes={[`maxWidth`, `mobilSmall`, `red`]}
+                        click={openAdminTournamentHandler}/>
+                <Button text={`Редактировать категории`} modes={[`maxWidth`, `mobilSmall`, `red`]}
+                        click={openAdminCategoryHandler}/>
                 <PositionBtn title={`Позиция`}/>
-                <Button text={`Открыть турнир`} modes={[`grey`,`maxWidth`,`mobilSmall`]} click={openTournamentHandler}/>
+                <Button text={`Открыть турнир`} modes={[`grey`, `maxWidth`, `mobilSmall`]}
+                        click={openTournamentHandler}/>
             </div>}
         </div>
     );
