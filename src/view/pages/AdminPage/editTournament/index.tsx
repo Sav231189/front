@@ -14,6 +14,7 @@ import {TournamentActions} from "store/tournament/reducer/tournamentReducer";
 import {tournamentThunk} from "store/tournament/thunk/tournamentThunk";
 import tournament_item from "view/assets/images/tounamentItem/tournament_item.png";
 import {getNewLogoTournamentSelector} from "store/tournament/selector/getNewLogoTournament";
+import {onFocus} from "@reduxjs/toolkit/dist/query/core/setupListeners";
 
 export const EditTournament = () => {
     const {id} = useParams()
@@ -53,6 +54,12 @@ export const EditTournament = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (isNew === false && !id) {
+            navigate(`/admin/tournament`)
+        }
+    }, [isNew, id])
+
     const changeFieldHandler = <T extends keyof TournamentType>(field: T, value: T | string) => {
         if (!editTournament) return;
         switch (field) {
@@ -91,7 +98,10 @@ export const EditTournament = () => {
     }
 
     const createTournamentHandler = () => {
-        createTournamentItem()
+        createTournamentItem((id:number) => {
+            navigate(`/admin/tournament/edit/${id}`)
+            setIsNew(false)
+        })
     }
     const changeLogoFilesHandler = (e:any) => {
         if (e.target.files && e.target.files[0]) {
@@ -131,6 +141,7 @@ export const EditTournament = () => {
                 <div className={css(s.avatar)}>
                     <div className={css(s.imgBox)}>
                         {newLogoTournament === null && editTournament.img === '' && <img src={tournament_item} alt="tournament_item" />}
+                        {newLogoTournament === null && editTournament.img !== '' && <img src={`http://localhost:7000/upload/`+editTournament.img} alt="tournament_item" />}
                         {newLogoTournament !== null && <img src={`${newLogoTournament}`} alt="tournament_item" />}
                     </div>
                     <label className={css(s.changeFile)}>

@@ -4,8 +4,9 @@ import {TournamentReducerType} from "store/tournament/type/reducerType";
 
 const initialState: TournamentReducerType = {
     list: null,
+    // newTournament: null,
     editTournament: null,
-    newLogo: null
+    newLogo: null,
 }
 
 export const slice = createSlice({
@@ -15,10 +16,13 @@ export const slice = createSlice({
         setTournamentListAction: (state, action: PayloadAction<Array<TournamentType>>) : void => {
             state.list = action.payload
         },
-        setEditTournamentAction: (state, action: PayloadAction<TournamentType>) : void => {
+        // setNewTournamentAction: (state, action: PayloadAction<TournamentType | null>) : void => {
+        //     state.newTournament = action.payload
+        // },
+        setEditTournamentAction: (state, action: PayloadAction<TournamentType | null>) : void => {
             state.editTournament = action.payload
         },
-        setNewLogoAction: (state, action: PayloadAction<File>) : void => {
+        setNewLogoAction: (state, action: PayloadAction<File | null>) : void => {
             state.newLogo = action.payload
         },
     }

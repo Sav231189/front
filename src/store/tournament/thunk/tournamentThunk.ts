@@ -5,6 +5,7 @@ import {serverHttp} from "config/api/api";
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "config/constants";
 import {authFetch} from "lib/authFetch";
 import {authThunk} from "store/auth/thunk/authThunk";
+import { push } from 'react-router-redux'
 
 
 export const tournamentThunk = {
@@ -34,7 +35,7 @@ export const tournamentThunk = {
             // dispatch(FetchingActions.setIsLoadingUserListAction(false))
         }
     },
-    createTournamentItem: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+    createTournamentItem: (accessCallback: Function) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
             const newTournament = getState().TournamentReducer.editTournament
             if (!newTournament) return
@@ -73,11 +74,15 @@ export const tournamentThunk = {
                 // },
                 body: formData
             })
-            // const data = await response.json()
-            // if (data.error) {
-            //     console.log(data.message)
-            //     return
-            // }
+            const data = await response.json()
+            if (data.error) {
+                console.log(data.message)
+                return
+            }
+            accessCallback(data.id)
+            dispatch(TournamentActions.setEditTournamentAction(data))
+            // dispatch(TournamentActions.setNewTournamentAction(null))
+            dispatch(TournamentActions.setNewLogoAction(null))
 
         } catch (error: any) {
             console.log('error client', error)
