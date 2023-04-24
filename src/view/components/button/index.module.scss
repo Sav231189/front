@@ -28,6 +28,12 @@
       background-color: var(--hoveSecondColor);
     }
   }
+  &.grey {
+    background-color: var(--primaryBtn);
+    &:hover {
+      background-color: var(--hoverBtn);
+    }
+  }
   &.uppercase {
     text-transform: uppercase;
   }

@@ -4,7 +4,7 @@ import {useMemo} from "react";
 
 type PropsType = {
     text: string
-    modes?: Array<'maxWidth'|'red'|'uppercase'|'mobilSmall'|'noRadius'>
+    modes?: Array<'maxWidth'|'red'|'grey'|'uppercase'|'mobilSmall'|'noRadius'>
     click?: Function
 }
 export const Button = (props: PropsType) => {

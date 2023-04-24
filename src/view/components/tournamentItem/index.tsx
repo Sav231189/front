@@ -50,7 +50,7 @@ export const TournamentItem = (props: PropsType) => {
                 <Button text={`Редактировать турнир`} modes={[`maxWidth`,`mobilSmall`,`red`]} click={openAdminTournamentHandler}/>
                 <Button text={`Редактировать категории`} modes={[`maxWidth`,`mobilSmall`,`red`]} click={openAdminCategoryHandler}/>
                 <PositionBtn title={`Позиция`}/>
-                <Button text={`Открыть турнир`} modes={[`maxWidth`,`mobilSmall`]} click={openTournamentHandler}/>
+                <Button text={`Открыть турнир`} modes={[`grey`,`maxWidth`,`mobilSmall`]} click={openTournamentHandler}/>
             </div>}
         </div>
     );

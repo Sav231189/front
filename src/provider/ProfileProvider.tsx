@@ -22,7 +22,7 @@ export const ProfileProvider = (props: PropsType) => {
         if (!user.id) return
 
         getProfile({id: user.id})
-    }, [user])
+    }, [user?.id])
 
     if (user && !user.id) return <>{children}</>;
     if (profile === null && (user && user.id)) return <div>Получение профиля...</div>

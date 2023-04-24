@@ -14,7 +14,7 @@ export const AuthProvider = (props: PropsType) => {
     const {checkAuth} = useThunks(authThunk)
 
     useEffect(() => {
-        checkAuth()
+        checkAuth(1000)
     }, [])
 
     if (user === null && localStorage.getItem(REFRESH_TOKEN)) return <div>Авторизация...</div>

@@ -4,9 +4,10 @@ import {AuthActions} from "store/auth/reducer/authReducer";
 import {serverHttp} from "config/api/api";
 import {UserRoleType} from "types/UserType";
 import jwt_decode from 'jwt-decode';
+import {authFetch} from "lib/authFetch";
 
 export const authThunk = {
-    checkAuth: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+    checkAuth: (delay?: number) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
             const accessToken = localStorage.getItem(ACCESS_TOKEN)
             const refreshToken = localStorage.getItem(REFRESH_TOKEN)
@@ -17,7 +18,7 @@ export const authThunk = {
                 return
             }
 
-            await new Promise(res=> setTimeout(()=>res(''), 1000))
+            await new Promise(res => setTimeout(() => res(''), delay ?? 0))
 
             const response = await fetch(`${serverHttp}/api/auth/refresh`, {
                 method: `POST`,
@@ -168,16 +169,18 @@ export const authThunk = {
         }
     },
 
-    getProfile: (params: {id: number}) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+    getProfile: (params: { id: number }) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
-            await new Promise(res=> setTimeout(()=>res(''), 1000))
+            await new Promise(res => setTimeout(() => res(''), 1000))
 
-            const response = await fetch(`${serverHttp}/api/profile/${params.id}`, {
+            const response = await authFetch(() => dispatch(authThunk.checkAuth()))
+            (`${serverHttp}/api/profile/${params.id}`, {
                 method: `GET`,
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
+
             const data = await response.json()
 
             if (data.error) {
