@@ -1,12 +1,12 @@
 
 export type TaskType = {
-    id: number,
+    id?: number,
     category_id: number,
     name: string,
     description: string,
     isOpen: boolean,
+    isHidden: boolean
     taskTypeId: number
-    result: ResultType | null
 }
 
 type ResultType = {

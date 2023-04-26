@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {LoginButton} from "view/components/loginButton";
 import {useAuth} from "store/auth/hook/useAuth";
 import {useProfile} from "store/auth/hook/useProfile";
+import tournament_item from "view/assets/images/tounamentItem/tournament_item.png";
 
 type PropsType = {
     tournament: TournamentType
@@ -15,14 +16,11 @@ export const TournamentHead = (props: PropsType) => {
 
     const navigate = useNavigate()
 
-    const user = useAuth()
-
-    const profile = useProfile()
-
     return (
         <div className={css(s.TournamentHead)}>
             <div className={css(s.logo)}>
-                <img src={tournament.img} alt="logo"/>
+                {tournament.img === '' && <img src={tournament_item} alt="tournament_item" />}
+                {tournament.img !== '' && <img src={`http://localhost:7000/upload/`+tournament.img} alt="tournament_item" />}
             </div>
             <div className={css(s.main)}>
                 <div className={css(s.info)}>
@@ -47,14 +45,8 @@ export const TournamentHead = (props: PropsType) => {
                                 click={() => navigate(`/tournament/prize/${tournament.id}`)}/>
                     </div>
                     <div className={css(s.btnRow, s.oneItem)}>
-                        {user && !user.id && <LoginButton text={`Регистрация на турнир`}/>}
-                        {user?.id && profile && profile.isFilled && !tournament.isPaidMe && (user?.role.includes('regular') || user?.role.includes('admin')) &&
-                            <Button text={'ПРИНЯТЬ УЧАСТИЕ'} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/select/${tournament.id}`)}/>}
-
-                        {user?.id && profile && profile.isFilled && tournament.isPaidMe && (user?.role.includes('regular') || user?.role.includes('admin')) &&
-                            <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.categoryId ?? 1}`)}/>}
-
-                        {user?.id && profile && !profile.isFilled && <Button text={'Заполнить профиль'} modes={[`uppercase`, `maxWidth`]} click={() => navigate(`/profile`)}/>}
+                        {!tournament.isPaidMe && <Button text={'ПРИНЯТЬ УЧАСТИЕ'} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/select/${tournament.id}`)}/>}
+                        {tournament.isPaidMe && <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.categoryId ?? 1}`)}/>}
                     </div>
                 </div>
             </div>

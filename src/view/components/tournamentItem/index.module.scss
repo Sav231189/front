@@ -1,3 +1,7 @@
+@keyframes showOpacity {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
 .BestsellerItem {
   position: relative;
   max-width: 340px;
@@ -5,9 +9,9 @@
   grid-template-rows: auto auto auto 1fr auto;
   padding: 10px;
   cursor: pointer;
-  transition: transform .2s;
+  transition: transform .4s;
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     .isEditable {
       display: flex;
     }
@@ -16,7 +20,7 @@
     width: 100%;
     //max-height: 400px;
     max-width: calc(50vw - 30px);
-    max-height: 320px;
+    height: 320px;
     //max-width: calc(50vw - 30px);
     overflow: hidden;
     border-radius: 10px;
@@ -34,6 +38,7 @@
     }
   }
   .title {
+    min-height: 30px;
     margin-top: 12px;
     font-weight: 700;
     font-size: 24px;
@@ -100,11 +105,12 @@
     top: 8px;
     bottom: 8px;
     border-radius: 10px;
-    padding: 40px 20px 20px;
+    padding: 20px 20px 0;
     overflow: hidden;
     flex-direction: column;
     align-items: center;
     row-gap: 30px;
+    animation: showOpacity 0.3s linear 0s both;
   }
   @media screen and (max-width: 767px) {
     max-width: calc(50vw - 30px);

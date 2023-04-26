@@ -4,7 +4,7 @@ import {TournamentReducerType} from "store/tournament/type/reducerType";
 
 const initialState: TournamentReducerType = {
     list: null,
-    // newTournament: null,
+    fullTournament: null,
     editTournament: null,
     newLogo: null,
 }
@@ -13,12 +13,12 @@ export const slice = createSlice({
     name: 'TournamentReducer',
     initialState,
     reducers: {
-        setTournamentListAction: (state, action: PayloadAction<Array<TournamentType>>) : void => {
+        setTournamentListAction: (state, action: PayloadAction<Array<TournamentType> | null>) : void => {
             state.list = action.payload
         },
-        // setNewTournamentAction: (state, action: PayloadAction<TournamentType | null>) : void => {
-        //     state.newTournament = action.payload
-        // },
+        setFullTournamentAction: (state, action: PayloadAction<TournamentType | null>) : void => {
+            state.fullTournament = action.payload
+        },
         setEditTournamentAction: (state, action: PayloadAction<TournamentType | null>) : void => {
             state.editTournament = action.payload
         },

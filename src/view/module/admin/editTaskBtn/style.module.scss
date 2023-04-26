@@ -1,0 +1,13 @@
+.EditTaskBtn {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    color: var(--grayColor);
+    cursor: pointer;
+    &:hover {
+      color: var(--primaryTextColor);
+    }
+  }
+}

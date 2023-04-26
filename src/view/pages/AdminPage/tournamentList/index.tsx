@@ -5,21 +5,27 @@ import loadGif from "view/assets/images/Load.gif";
 import {TournamentItem} from "view/components/tournamentItem";
 import {useSelector} from "react-redux";
 import {getTournamentListSelector} from "store/tournament/selector/getTournamentList";
-import {useThunks} from "lib/reduxHook";
+import {useActions, useThunks} from "lib/reduxHook";
 import {tournamentThunk} from "store/tournament/thunk/tournamentThunk";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {TournamentActions} from "store/tournament/reducer/tournamentReducer";
 
 export const AdminTournamentList = () => {
 
     const navigate = useNavigate()
 
+    const {setTournamentListAction} = useActions(TournamentActions)
+
     const tournamentList = useSelector(getTournamentListSelector)
 
-    const {getList} = useThunks(tournamentThunk)
+    const {getAdminList} = useThunks(tournamentThunk)
 
     useEffect(() => {
-        getList()
+        getAdminList()
+        return () => {
+            setTournamentListAction(null)
+        }
     }, [])
 
     return (

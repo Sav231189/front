@@ -4,19 +4,25 @@ import {TournamentItem} from "view/components/tournamentItem";
 import {Button} from "view/components/button";
 import {useSelector} from "react-redux";
 import {getTournamentListSelector} from "store/tournament/selector/getTournamentList";
-import {useThunks} from "lib/reduxHook";
+import {useActions, useThunks} from "lib/reduxHook";
 import {tournamentThunk} from "store/tournament/thunk/tournamentThunk";
 import {useEffect} from "react";
 import loadGif from 'view/assets/images/Load.gif'
+import {TournamentActions} from "store/tournament/reducer/tournamentReducer";
 
 export const TournamentListPage = () => {
 
     const tournamentList = useSelector(getTournamentListSelector)
 
+    const {setTournamentListAction} = useActions(TournamentActions)
+
     const {getList} = useThunks(tournamentThunk)
 
     useEffect(() => {
         getList()
+        return () => {
+            setTournamentListAction(null)
+        }
     }, [])
 
     return (

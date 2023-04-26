@@ -1,0 +1,33 @@
+
+.EditTaskForm {
+  position: relative;
+  background-color: var(--primaryBg);
+  border: solid 1px white;
+  padding: 30px 40px;
+  min-width: 520px;
+  .head {
+    font-size: 34px;
+    font-weight: bold;
+  }
+  .main {
+    width: 100%;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    .form {
+      //max-width: 700px;
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+      align-content: start;
+
+      .btnBox {
+        margin: 20px 0 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+      }
+    }
+  }
+}

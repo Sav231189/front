@@ -5,7 +5,7 @@ import {Button} from "view/components/button";
 import {taskThunk} from "store/task/thunk/taskThunk";
 import {useThunks} from "lib/reduxHook";
 import {useEffect} from "react";
-import {taskListSelector} from "store/task/selector/getTaskList";
+import {getTaskListSelector} from "store/task/selector/getTaskList";
 import {useSelector} from "react-redux";
 import {TaskItem} from "view/components/taskItem";
 
@@ -13,7 +13,7 @@ export const AddResultPage = () => {
     const {id} = useParams()
     const navigate = useNavigate()
 
-    const taskList = useSelector(taskListSelector)
+    const taskList = useSelector(getTaskListSelector)
 
     const {getList} = useThunks(taskThunk)
     useEffect(() => {

@@ -45,11 +45,6 @@ export const router = createBrowserRouter([
                 errorElement: <Navigate to={`/`} />,
                 children: [
                     {
-                        path: "list",
-                        element: <TournamentListPage />,
-                        errorElement: <Navigate to={`/`} />,
-                    },
-                    {
                         path: ":id",
                         element: <TournamentPage />,
                         errorElement: <Navigate to={`/`} />,
@@ -80,6 +75,11 @@ export const router = createBrowserRouter([
                         errorElement: <Navigate to={`/`} />,
                     },
                 ]
+            },
+            {
+                path: "tournament/list",
+                element: <TournamentListPage />,
+                errorElement: <Navigate to={`/`} />,
             },
             {
                 path: "admin",

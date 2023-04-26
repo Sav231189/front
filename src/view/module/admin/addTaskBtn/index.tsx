@@ -3,27 +3,24 @@ import {css} from "lib/customClassName";
 import {Button} from "view/components/button";
 import {useState} from "react";
 import {Popup} from 'view/components/popup';
+import {EditTaskForm} from "view/module/admin/editTaskForm";
 
-export const AddTaskBtn = () => {
+type PropsType = {
+    categoryId: number
+}
+export const AddTaskBtn = (props: PropsType) => {
+    const {categoryId} = props
+
     const [isShowPopup, setIsShowPopup] = useState(false)
 
     return (
         <div className={css(s.AddTaskBtn)}>
-            <Button text={`Добавить задачу`} modes={[`maxWidth`]} click={()=>setIsShowPopup(true)}/>
+            <Button text={`Добавить задание`} modes={[`maxWidth`]} click={()=>setIsShowPopup(true)}/>
             {isShowPopup &&
                 <Popup clickCloseBtnCallback={()=>setIsShowPopup(false)}>
-                    <AddForm/>
+                    <EditTaskForm closePopup={()=>setIsShowPopup(false)} categoryId={categoryId}/>
                 </Popup>
             }
-        </div>
-    );
-};
-
-const AddForm = () => {
-
-    return (
-        <div className={css(s.AddForm)}>
-            AddForm
         </div>
     );
 };

@@ -29,7 +29,7 @@ export const EditTournament = () => {
 
     const {setEditTournamentAction, setNewLogoAction} = useActions(TournamentActions)
 
-    const {getTournamentItem, createTournamentItem} = useThunks(tournamentThunk)
+    const {getAdminTournamentItem, createTournamentItem, updateTournamentItem} = useThunks(tournamentThunk)
 
     useEffect(() => {
         if (!id) {
@@ -39,7 +39,7 @@ export const EditTournament = () => {
                 descriptionSmall: '',
                 startDate: '',
                 isOnline: false,
-                isHidden: false,
+                isHidden: true,
                 isShowTable: false,
                 status: 'Скоро старт',
                 description: '',
@@ -49,8 +49,11 @@ export const EditTournament = () => {
             })
             setIsNew(true)
         } else {
-            getTournamentItem(Number(id))
+            getAdminTournamentItem(Number(id))
             setIsNew(false)
+        }
+        return () => {
+            setEditTournamentAction(null)
         }
     }, [])
 
@@ -103,6 +106,11 @@ export const EditTournament = () => {
             setIsNew(false)
         })
     }
+    const updateTournamentHandler = () => {
+        updateTournamentItem((id:number) => {
+
+        })
+    }
     const changeLogoFilesHandler = (e:any) => {
         if (e.target.files && e.target.files[0]) {
             setNewLogoAction(e.target.files[0]);
@@ -128,14 +136,15 @@ export const EditTournament = () => {
                     <InputText title={`Описание турнира`} value={editTournament.descriptionSmall} change={str => changeFieldHandler('descriptionSmall', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <InputText title={`Дата проведения`} value={editTournament.startDate} change={str => changeFieldHandler('startDate', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <RadioButton title={`Тип турнира`} value={editTournament.isOnline ?`Online`:`Offline`} change={str => changeFieldHandler('isOnline', str)} list={[`Offline`,`Online`]}/>
-                    <RadioButton title={`Видимость`} value={editTournament.isHidden ? `Не виден в каталоге турниров`:`Виден в каталоге турниров`} change={str => changeFieldHandler('isHidden', str)} list={[`Виден в каталоге турниров`,`Не виден в каталоге турниров`]}/>
+                    <RadioButton title={`Видимость`} value={editTournament.isHidden ? `Не виден в каталоге турниров`:`Виден в каталоге турниров`} change={str => changeFieldHandler('isHidden', str)} list={[`Не виден в каталоге турниров`, `Виден в каталоге турниров`]}/>
                     <RadioButton title={`Турнирная таблица`} value={editTournament.isShowTable ? `Доступна`:`Не доступна`} change={str => changeFieldHandler('isShowTable', str)} list={[`Не доступна`,`Доступна`]}/>
-                    <RadioButton title={`Выборка`} value={editTournament.status} change={str => changeFieldHandler('status', str)} list={[`Сейчас идет`,`Скоро старт`,`Завершен, ждет проверки`,`Завершен`]}/>
+                    <RadioButton title={`Выборка`} value={editTournament.status} change={str => changeFieldHandler('status', str)} list={[`Скоро старт`,`Сейчас идет`,`Завершен, ждет проверки`,`Завершен`]}/>
                     <InputText title={`Описание турнира`} value={editTournament.description} change={str => changeFieldHandler('description', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <InputText title={`Призы`} value={editTournament.prize} change={str => changeFieldHandler('prize', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <InputText title={`Правила`}  value={editTournament.rules}change={str => changeFieldHandler('rules', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <div className={css(s.btnBox)}>
-                        <Button text={`${isNew ? `Создать`:`Сохранить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={createTournamentHandler}/>
+                        {!isNew && <Button text={`Сохранить    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={updateTournamentHandler}/>}
+                        {isNew && <Button text={`Создать    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={createTournamentHandler}/>}
                     </div>
                 </div>
                 <div className={css(s.avatar)}>

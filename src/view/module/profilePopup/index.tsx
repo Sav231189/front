@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "store/auth/hook/useAuth";
 import {useThunks} from "lib/reduxHook";
 import {authThunk} from "store/auth/thunk/authThunk";
+import {useProfile} from "store/auth/hook/useProfile";
 
 type PropsType = {
     closePopup: Function
@@ -12,6 +13,8 @@ type PropsType = {
 export const ProfilePopup = (props: PropsType) => {
     const {closePopup} = props
     const navigate = useNavigate()
+
+    const profile = useProfile()
 
     const user = useAuth()
 
@@ -31,8 +34,8 @@ export const ProfilePopup = (props: PropsType) => {
 
                 </div>
                 <div className={css(s.fullName)}>
-                    <div className={css(s.lastName)}>Салманов</div>
-                    <div className={css(s.firstName)}>Александр</div>
+                    <div className={css(s.lastName)}>{profile?.firstName}</div>
+                    <div className={css(s.firstName)}>{profile?.firstName}</div>
                 </div>
             </div>
             <div className={css(s.info)}>

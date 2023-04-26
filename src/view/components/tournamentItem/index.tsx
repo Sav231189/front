@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {TournamentType} from "types/TournamentType";
 import {Button} from "view/components/button";
 import {PositionBtn} from "view/components/positionBtn";
+import tournament_item from "view/assets/images/tounamentItem/tournament_item.png";
 
 type PropsType = {
     item: TournamentType
@@ -32,7 +33,8 @@ export const TournamentItem = (props: PropsType) => {
     return (
         <div className={css(s.BestsellerItem)} onClick={openTournamentHandler}>
             <div className={css(s.imgBox)}>
-                <img src={item.img} alt="img"/>
+                {item.img === '' && <img src={tournament_item} alt="tournament_item" />}
+                {item.img !== '' && <img src={`http://localhost:7000/upload/`+item.img} alt="tournament_item" />}
             </div>
             <div className={css(s.title)}>{item.name}</div>
             <div className={css(s.text)}>{item.descriptionSmall}</div>
@@ -44,9 +46,9 @@ export const TournamentItem = (props: PropsType) => {
                         click={openAdminTournamentHandler}/>
                 <Button text={`Редактировать категории`} modes={[`maxWidth`, `mobilSmall`, `red`]}
                         click={openAdminCategoryHandler}/>
-                <PositionBtn title={`Позиция`}/>
                 <Button text={`Открыть турнир`} modes={[`grey`, `maxWidth`, `mobilSmall`]}
                         click={openTournamentHandler}/>
+                <PositionBtn title={`Позиция`}/>
             </div>}
         </div>
     );

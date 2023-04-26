@@ -4,23 +4,24 @@ import {Button} from "view/components/button";
 import {useState} from "react";
 import {Popup} from 'view/components/popup';
 import {EditCategoryForm} from "view/module/admin/editCategoryForm";
+import {CategoryType} from "types/CategoryType";
 
 type PropsType = {
-
+    categoryItem: CategoryType
 }
-export const AddCategoryBtn = (props: PropsType) => {
-    const {} = props
+export const EditCategoryBtn = (props: PropsType) => {
+    const {categoryItem} = props
 
     const [isShowPopup, setIsShowPopup] = useState(false)
 
     return (
         <>
-            <div className={css(s.AddCategoryBtn)}>
-                <Button text={`Добавить +`} modes={[`maxWidth`, `red`]} click={() => setIsShowPopup(true)}/>
+            <div className={css(s.EditCategoryBtn)}>
+                <Button text={`Редактировать`} modes={[`maxWidth`]} click={() => setIsShowPopup(true)}/>
             </div>
             {isShowPopup &&
                 <Popup clickCloseBtnCallback={() => setIsShowPopup(false)}>
-                    <EditCategoryForm closePopup={()=>setIsShowPopup(false)}/>
+                    <EditCategoryForm categoryItem={categoryItem} closePopup={()=>setIsShowPopup(false)}/>
                 </Popup>
             }
         </>

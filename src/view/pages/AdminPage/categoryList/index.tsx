@@ -4,11 +4,13 @@ import {Button} from "view/components/button";
 import {useNavigate, useParams} from "react-router-dom";
 import {categoryListSelector} from "store/category/selector/getCategoryList";
 import {useSelector} from "react-redux";
-import {CategoryItem} from "view/module/admin/categoryItem";
+import {AdminCategoryItem} from "view/module/admin/adminCategoryItem";
 import {useEffect} from "react";
-import {useThunks} from "lib/reduxHook";
+import {useActions, useThunks} from "lib/reduxHook";
 import {categoryThunk} from "store/category/thunk/categoryThunk";
 import {AddCategoryBtn} from "view/module/admin/addCategoryBtn";
+import {CategoryActions} from "store/category/reducer/CategoryReducer";
+import loadGif from "view/assets/images/Load.gif";
 
 export const CategoryList = () => {
     const {id} = useParams()
@@ -16,11 +18,16 @@ export const CategoryList = () => {
 
     const categoryList = useSelector(categoryListSelector)
 
+    const {setCategoryListAction} = useActions(CategoryActions)
+
     const {getAdminList} = useThunks(categoryThunk)
 
     useEffect(() => {
         if (!id) return
         getAdminList(Number(id))
+        return () => {
+            setCategoryListAction(null)
+        }
     }, [])
 
     if (!id) {
@@ -38,9 +45,11 @@ export const CategoryList = () => {
                     <AddCategoryBtn />
                 </div>
                 <div className={css(s.list)}>
-                    {categoryList?.map(category =>
-                        <CategoryItem key={category.id} category={category}/>
-                    )}
+                    {categoryList?.map(category =><AdminCategoryItem key={category.id} category={category}/>)}
+                    {categoryList === null && <div className={css(s.loadingList)}>
+                        <img src={loadGif} alt="load"/>
+                        <span>Загрузка...</span>
+                    </div>}
                 </div>
             </div>
         </div>

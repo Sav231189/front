@@ -1,0 +1,40 @@
+@keyframes skeleton {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.Skeleton {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  //background: rgba(110, 110, 110, 0.4);
+  //background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1s skeleton linear infinite;
+
+  //background: rgb(87, 87, 87);
+  background: linear-gradient(
+                  100deg,
+                  rgba(255, 255, 255, 0) 40%,
+                  rgba(143, 143, 143, 0.12) 50%,
+                  rgba(255, 255, 255, 0) 60%
+  ) rgba(227, 227, 227, 0);
+  background-size: 200% 100%;
+  //background-position-x: 180%;
+  //animation: skeleton 1s ease-in-out 0s infinite;
+}
+
+.grey {
+  background-color: var(--primaryOpacityBtn);
+}
+.low {
+  animation: 2.5s skeleton linear infinite;
+}
+.fast {
+  animation: .5s skeleton linear infinite;
+}
