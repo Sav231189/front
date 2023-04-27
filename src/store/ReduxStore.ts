@@ -3,6 +3,7 @@ import {AuthReducer} from "store/auth/reducer/authReducer";
 import {TournamentReducer} from "store/tournament/reducer/tournamentReducer";
 import {TaskReducer} from "store/task/reducer/TaskReducer";
 import {CategoryReducer} from "store/category/reducer/CategoryReducer";
+import {ResultReducer} from "store/result/reducer/ResultReducer";
 
 const middleware = getDefaultMiddleware({
     immutableCheck: false,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     TournamentReducer,
     TaskReducer,
     CategoryReducer,
+    ResultReducer,
 })
 
 export const store = configureStore({

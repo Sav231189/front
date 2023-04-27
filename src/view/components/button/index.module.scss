@@ -51,5 +51,27 @@
       }
     }
   }
+  &.isLoading {
+    position: relative;
+    pointer-events: none;
+    opacity: .8;
+    span {
+      opacity: 0;
+    }
+    img {
+      display: block;
+      position: absolute;
+      top: 7px;
+      width: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
+  }
+
+  &:disabled {
+    background-color: var(--primaryOpacityBtn);
+    pointer-events: none;
+    color: var(--grayColor);
+  }
 }

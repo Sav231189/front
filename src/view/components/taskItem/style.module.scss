@@ -12,11 +12,28 @@
       text-overflow: ellipsis;
       overflow: hidden;
       font-weight: 700;
-      font-size: 48px;
+      font-size: 28px;
     }
     .status {
       margin-top: 5px;
       font-size: 18px;
+      &.await {
+        color: #adad01;
+      }
+      &.reject {
+        color: #b70000;
+      }
+      &.access {
+        color: #00be00;
+      }
+    }
+  }
+  .description {
+    margin-top: 10px;
+    span {
+      margin-right: 10px;
+      text-transform: uppercase;
+      color: var(--grayColor);
     }
   }
   .moreBtn {
@@ -30,23 +47,28 @@
     .resultBox {
       max-width: 500px;
       .link {
-        label {
-          display: grid;
-          grid-template-columns: 1fr;
-          row-gap: 10px;
-          cursor: pointer;
-          span {
-            color: var(--grayColor);
-          }
-          input {
-            background-color: var(--invertedPrimaryBg);
-            height: 40px;
-            padding-left: 10px;
-          }
-        }
       }
       .result {
-        margin-top: 30px;
+        margin-top: 20px;
+        .time {
+          display: flex;
+          column-gap: 20px;
+          input {
+            width: 100px;
+          }
+        }
+        .amount {
+          input {
+            width: 152px;
+          }
+        }
+        .weight {
+          display: flex;
+          column-gap: 20px;
+          input {
+            width: 100px;
+          }
+        }
       }
     }
     .btnBox {

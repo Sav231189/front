@@ -18,12 +18,12 @@ export const AdminCategoryItem = (props: PropsType) => {
 
     const [isShowTaskList, setIsShowTaskList] = useState(false)
 
-    const {getList} = useThunks(taskThunk)
+    const {getAdminList} = useThunks(taskThunk)
 
     const showTaskListHandler = () => {
         setIsShowTaskList(prev => !prev)
         if (category.taskList === null) {
-            getList(Number(category.id))
+            getAdminList(Number(category.id))
         }
     }
 

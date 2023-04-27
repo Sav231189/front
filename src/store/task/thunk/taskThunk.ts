@@ -1,13 +1,11 @@
 import {AppDispatch, RootState} from "store/ReduxStore";
-import {TaskActions} from "store/task/reducer/TaskReducer";
 import {authFetch} from "lib/authFetch";
 import {authThunk} from "store/auth/thunk/authThunk";
 import {serverHttp} from "config/api/api";
 import {CategoryActions} from "store/category/reducer/CategoryReducer";
 
 export const taskThunk = {
-
-    getList: (id: number) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+    getAdminList: (id: number) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
             await new Promise((resolve) => {
                 setTimeout(resolve, 1000)
@@ -16,7 +14,7 @@ export const taskThunk = {
             // tournamentId,
 
             const response = await authFetch(() => dispatch(authThunk.checkAuth()))
-            (`${serverHttp}/api/task/list/${id}`, {
+            (`${serverHttp}/api/task/admin-list/${id}`, {
                 method: `GET`,
                 headers: {
                     'Content-Type': 'application/json',

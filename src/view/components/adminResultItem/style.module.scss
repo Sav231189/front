@@ -1,0 +1,72 @@
+.AdminResultItem {
+  margin-top: 10px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  column-gap: 10px;
+  &:nth-child(even) {
+    .userName {background-color: rgba(42, 41, 54, 0.63);}
+    .youtubeLink {background-color: rgba(42, 41, 54, 0.63);}
+    .status {background-color: rgba(42, 41, 54, 0.63);}
+    .change {background-color: rgba(42, 41, 54, 0.63);}
+  }
+  .userName, .youtubeLink, .status, .change {
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--thirdPrimaryBtn);
+    &:hover {
+      background-color: var(--hoverBtn);
+      color: var(--primaryTextColor);
+    }
+  }
+  .userName {
+    background-color: rgba(42, 41, 54, 0.4);
+    span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  .youtubeLink {
+    background-color: rgba(42, 41, 54, 0.4);
+    width: 260px;
+    text-decoration: none;
+  }
+  .status {
+    pointer-events: none;
+    justify-content: center;
+    background-color: rgba(42, 41, 54, 0.4);
+    width: 200px;
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr auto;
+    .icon {
+      fill: var(--grayColor);
+      &.await {
+        fill: #595959;
+      }
+      &.access {
+        fill: #017c01;
+      }
+      &.reject {
+        fill: #7c0101;
+      }
+    }
+  }
+  .change {
+    justify-content: center;
+    background-color: rgba(42, 41, 54, 0.4);
+    width: 40px;
+    svg {
+      fill: var(--grayColor);
+    }
+    &:hover {
+      svg {
+        fill: var(--primaryTextColor);
+      }
+    }
+  }
+}

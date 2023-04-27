@@ -74,7 +74,23 @@ export const EditTaskForm = (props: PropsType) => {
                 setEditTaskAction({...editTask, isHidden: value !== `Виден участникам`})
                 break
             case 'taskTypeId':
-                setEditTaskAction({...editTask, taskTypeId: Number(value)})
+                switch (value) {
+                    case 'Время Минимум':
+                        setEditTaskAction({...editTask, taskTypeId: Number(1)})
+                        break
+                    case 'Время Максимум':
+                        setEditTaskAction({...editTask, taskTypeId: Number(2)})
+                        break
+                    case 'Количество':
+                        setEditTaskAction({...editTask, taskTypeId: Number(3)})
+                        break
+                    case 'Вес':
+                        setEditTaskAction({...editTask, taskTypeId: Number(4)})
+                        break
+                    case 'Рост':
+                        setEditTaskAction({...editTask, taskTypeId: Number(5)})
+                        break
+                }
                 break
         }
     }
@@ -93,6 +109,17 @@ export const EditTaskForm = (props: PropsType) => {
         })
     }
 
+    const getStringTaskTypeId = (id:number) => {
+        switch (id) {
+            case 1: return `Время Минимум`
+            case 2: return `Время Максимум`
+            case 3: return `Количество`
+            case 4: return `Вес`
+            case 5: return `Рост`
+            default: return `Время Минимум`
+        }
+    }
+
     return (
         <div className={css(s.EditTaskForm)}>
             <div className={css(s.head)}>
@@ -104,6 +131,8 @@ export const EditTaskForm = (props: PropsType) => {
                     <InputText title={`Описание задания`} value={editTask?.description ?? ''} change={str => changeFieldHandler('description', str)} placeholder={`Введите текст`} modes={[`maxWidth`]}/>
                     <RadioButton title={`Подача результатов`} value={editTask?.isOpen ? `Открыта`:`Закрыта`} change={str => changeFieldHandler('isOpen', str)} list={[`Открыта`,`Закрыта`]}/>
                     <RadioButton title={`Не виден участникам`} value={editTask?.isHidden ? `Не виден участникам`:`Виден участникам`} change={str => changeFieldHandler('isHidden', str)} list={[`Не виден участникам`, `Виден участникам`]}/>
+                    {isNew && <RadioButton title={`Значение результата`} value={getStringTaskTypeId(editTask?.taskTypeId as number)} change={str => changeFieldHandler('taskTypeId', str)} list={[`Время Минимум`, `Время Максимум`,`Количество`,`Вес`,`Рост`]}/>}
+                    {!isNew && <RadioButton title={`Значение результата`} value={getStringTaskTypeId(editTask?.taskTypeId as number)} list={[`${getStringTaskTypeId(editTask?.taskTypeId as number)}`]}/>}
                     <div className={css(s.btnBox)}>
                         {isNew === null && <Button text={` `} modes={[`red`, `maxWidth`, `noRadius`]} />}
                         {isNew === false && <Button text={`Сохранить    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={updateTaskHandler}/>}

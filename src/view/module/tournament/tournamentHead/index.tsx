@@ -20,7 +20,7 @@ export const TournamentHead = (props: PropsType) => {
         <div className={css(s.TournamentHead)}>
             <div className={css(s.logo)}>
                 {tournament.img === '' && <img src={tournament_item} alt="tournament_item" />}
-                {tournament.img !== '' && <img src={`http://localhost:7000/upload/`+tournament.img} alt="tournament_item" />}
+                {tournament?.img !== '' && <img src={`http://localhost:7000/upload/`+tournament.img} alt="tournament_item" />}
             </div>
             <div className={css(s.main)}>
                 <div className={css(s.info)}>
@@ -46,7 +46,7 @@ export const TournamentHead = (props: PropsType) => {
                     </div>
                     <div className={css(s.btnRow, s.oneItem)}>
                         {!tournament.isPaidMe && <Button text={'ПРИНЯТЬ УЧАСТИЕ'} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/select/${tournament.id}`)}/>}
-                        {tournament.isPaidMe && <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.categoryId ?? 1}`)}/>}
+                        {tournament.isPaidMe && <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.id}`)}/>}
                     </div>
                 </div>
             </div>

@@ -6,6 +6,8 @@ import {CategoryType} from "types/CategoryType";
 import {LoginButton} from "view/components/loginButton";
 import {useAuth} from "store/auth/hook/useAuth";
 import {useProfile} from "store/auth/hook/useProfile";
+import {useThunks} from "lib/reduxHook";
+import {categoryThunk} from "store/category/thunk/categoryThunk";
 
 type PropsType = {
     category: CategoryType
@@ -21,6 +23,12 @@ export const CategoryItem = (props: PropsType) => {
 
     const profile = useProfile()
 
+    const {buyCategory} = useThunks(categoryThunk)
+
+    const buyCategoryHandler = () => {
+        buyCategory(Number(category.id), () => navigate(`/tournament/${id}`))
+    }
+
     if (!id) return null
     return (
         <div className={css(s.CategoryItem)}>
@@ -34,7 +42,7 @@ export const CategoryItem = (props: PropsType) => {
             <div className={css(s.description)}>{category.description}</div>
             <div className={css(s.price)}>Цена: {category.price} Р</div>
             <div className={css(s.bayBtn)}>
-                {user && !!user.id && <Button text={`${Number(category.price) === 0 ? `Бесплатно`:`Купить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={() => navigate(`/tournament/${id}`)}/>}
+                {user && !!user.id && <Button text={`${Number(category.price) === 0 ? `Бесплатно`:`Купить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={buyCategoryHandler}/>}
                 {user && !user.id && <LoginButton text={`Войти`}/>}
                 {profile && !profile.isFilled && <Button text={'Заполнить профиль'} modes={[`uppercase`, `maxWidth`]} click={() => navigate(`/profile`)}/>}
             </div>

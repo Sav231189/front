@@ -5,19 +5,21 @@ import {Button} from "view/components/button";
 import {taskThunk} from "store/task/thunk/taskThunk";
 import {useThunks} from "lib/reduxHook";
 import {useEffect} from "react";
-import {getTaskListSelector} from "store/task/selector/getTaskList";
 import {useSelector} from "react-redux";
 import {TaskItem} from "view/components/taskItem";
+import {categoryThunk} from "store/category/thunk/categoryThunk";
+import {categoryListSelector} from "store/category/selector/getCategoryList";
 
 export const AddResultPage = () => {
     const {id} = useParams()
     const navigate = useNavigate()
 
-    const taskList = useSelector(getTaskListSelector)
+    const categoryList = useSelector(categoryListSelector)
 
-    const {getList} = useThunks(taskThunk)
+    const {getListWithTask} = useThunks(categoryThunk)
+
     useEffect(() => {
-        getList(Number(id))
+        getListWithTask(Number(id))
     },[])
 
     if (!id) return null
@@ -27,11 +29,16 @@ export const AddResultPage = () => {
                 <div className={css(s.main)} >
                     <Button text={`←    Назад`} click={()=>navigate(`/tournament/${id}`)}/>
                     <div className={css(s.titlePage)}>ЗАНЕСЕНИЕ РЕЗУЛЬТАТОВ</div>
-                    <div className={css(s.list)}>
-                        {taskList?.map(task =>
-                            <TaskItem key={task.id} task={task}/>
-                        )}
-                    </div>
+                    {(categoryList?.length ?? 0) > 1 && <div>
+
+                    </div>}
+                    {categoryList?.map(category =>
+                        <div key={category.id} className={css(s.list)}>
+                            {category.taskList?.map(task =>
+                                <TaskItem key={task.id} task={task}/>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

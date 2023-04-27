@@ -8,15 +8,33 @@
     background-color: var(--invertedPrimaryBg);
     padding-left: 10px;
 
-    &::placeholder {
-      text-transform: uppercase;
-    }
     &:focus::placeholder {
       color: transparent;
     }
     &.maxWidth {
       width: 100%;
     }
+    &.center {
+      width: 100%;
+      padding-left: 0;
+      text-align: center;
+    }
+    &.placeholderUppercase::placeholder {
+      text-transform: uppercase;
+    }
+
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; // Yeah, yeah everybody write about it
+  }
+
+  input[type='number'],
+  input[type="number"]:hover,
+  input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
   }
 }
 

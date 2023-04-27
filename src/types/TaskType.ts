@@ -9,7 +9,3 @@ export type TaskType = {
     taskTypeId: number
 }
 
-type ResultType = {
-    id: number,
-    status: 'await'|'access'|'reject'
-}
