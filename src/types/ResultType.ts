@@ -1,4 +1,5 @@
 import {ProfileType, UserType} from "types/UserType";
+import {TaskType} from "types/TaskType";
 
 export type ResultType = {
     id?: number,
@@ -7,6 +8,8 @@ export type ResultType = {
     status: 'new'|'await'|'access'|'reject',
     taskTypeId: number,
     youtube: string,
+    adminComment: string,
     value: any,
     user: UserType & { profile: ProfileType }
+    task?: TaskType
 }

@@ -141,4 +141,44 @@ export const resultThunk = {
             // dispatch(FetchingActions.setIsLoadingUserListAction(false))
         }
     },
+    updateAdmin: (status: string) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000)
+            })
+            const result = getState().ResultReducer.confirmResult
+
+            if (!result) return
+
+            const response = await authFetch(() => dispatch(authThunk.checkAuth()))
+            (`${serverHttp}/api/result/update-admin`, {
+                method: `PUT`,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: result.id,
+                    status: status,
+                    processedValue: result.value,
+                    adminComment: result.adminComment,
+                })
+            })
+
+            const data = await response.json()
+
+            if (data.error) {
+                console.log(data.message)
+                return
+            }
+
+            // в зависимости от фильтра изменить или удалить... Пока толлько изменить
+
+            dispatch(ResultActions.changeAdminResultByIdAction(data))
+
+        } catch (error: any) {
+            console.log('error client', error)
+        } finally {
+            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
+        }
+    },
 }

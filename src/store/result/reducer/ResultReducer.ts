@@ -22,6 +22,10 @@ export const slice = createSlice({
         changeResultByIdAction: (state, action: PayloadAction<ResultType>) : void => {
             state.resultItems[`${action.payload.taskId}`] = {...action.payload, value: String(action.payload.value)}
         },
+        changeAdminResultByIdAction: (state, action: PayloadAction<ResultType>) : void => {
+            if (!state.adminResultList) return
+            state.adminResultList = state.adminResultList?.map(el => el.id === action.payload.id ? {...el,...action.payload} : el)
+        },
 
         setAdminResultListAction: (state, action: PayloadAction<Array<ResultType> | null>) : void => {
             state.adminResultList = action.payload

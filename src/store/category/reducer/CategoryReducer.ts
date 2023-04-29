@@ -37,18 +37,19 @@ export const slice = createSlice({
         },
         addTaskAction: (state, action: PayloadAction<TaskType>): void => {
             const item = state.categoryList?.find(el => {
-                return  el.id === action.payload.category_id
+                return  el.id === action.payload.categoryId
             })
             if (!item || !item.taskList) return
             item.taskList.unshift(action.payload)
         },
         updateTaskAction: (state, action: PayloadAction<TaskType>): void => {
             const item = state.categoryList?.find(el => {
-                return  el.id === action.payload.category_id
+                return  el.id === action.payload.categoryId
             })
             if (!item || !item.taskList) return
             item.taskList = item.taskList.map(task => task.id === action.payload.id ? action.payload : task)
         },
+
     }
 })
 

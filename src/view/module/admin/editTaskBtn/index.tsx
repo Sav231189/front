@@ -18,7 +18,7 @@ export const EditTaskBtn = (props: PropsType) => {
             <span onClick={()=>setIsShowPopup(true)}>изменить</span>
             {isShowPopup &&
                 <Popup clickCloseBtnCallback={()=>setIsShowPopup(false)}>
-                    <EditTaskForm closePopup={()=>setIsShowPopup(false)} categoryId={task.category_id} taskItem={task}/>
+                    <EditTaskForm closePopup={()=>setIsShowPopup(false)} categoryId={task.categoryId} taskItem={task}/>
                 </Popup>
             }
         </div>

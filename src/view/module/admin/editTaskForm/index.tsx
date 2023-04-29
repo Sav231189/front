@@ -38,7 +38,7 @@ export const EditTaskForm = (props: PropsType) => {
 
         if (!taskItem) {
             setEditTaskAction({
-                category_id: Number(categoryId),
+                categoryId: Number(categoryId),
                 name: '',
                 description: '',
                 isOpen: false,

@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {TournamentType} from "types/TournamentType";
-import {TournamentReducerType} from "store/tournament/type/reducerType";
+import {ResultTable, TournamentReducerType} from "store/tournament/type/reducerType";
 
 const initialState: TournamentReducerType = {
     list: null,
     fullTournament: null,
     editTournament: null,
     newLogo: null,
+    resultTable: null
 }
 
 export const slice = createSlice({
@@ -24,6 +25,9 @@ export const slice = createSlice({
         },
         setNewLogoAction: (state, action: PayloadAction<File | null>) : void => {
             state.newLogo = action.payload
+        },
+        setResultTableAction: (state, action: PayloadAction<ResultTable>) : void => {
+            state.resultTable = action.payload
         },
     }
 })

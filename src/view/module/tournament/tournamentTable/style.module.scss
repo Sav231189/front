@@ -1,3 +1,31 @@
 .TournamentTable {
+  //width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
 
+  .table {
+    //overflow: auto;
+    max-width: 1470px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+.TableHead {
+  height: 60px;
+  //width: 100%;
+  background-color: var(--litePrimaryBg);
+  display: flex;
+  div {
+    background-color: var(--litePrimaryBg);
+    flex: 0 0 200px;
+    padding: 0 20px;
+  }
+}
+.TableResultItem {
+  display: flex;
+  min-height: 40px;
+  div {
+    flex: 0 0 200px;
+    padding: 0 20px;
+  }
 }

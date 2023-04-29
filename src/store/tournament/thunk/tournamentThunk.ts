@@ -4,7 +4,6 @@ import {serverHttp} from "config/api/api";
 import {authFetch} from "lib/authFetch";
 import {authThunk} from "store/auth/thunk/authThunk";
 
-
 export const tournamentThunk = {
     getAdminList: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
@@ -14,34 +13,6 @@ export const tournamentThunk = {
 
             const response:any = await authFetch(() => dispatch(authThunk.checkAuth()))
             (`${serverHttp}/api/tournament/admin-ist`, {
-                method: `GET`,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            const data = await response.json()
-            if (data.error) {
-                console.log(data.message)
-                return
-            }
-
-            dispatch(TournamentActions.setTournamentListAction(data.rows))
-
-        } catch (error: any) {
-            console.log('error client', error)
-        } finally {
-            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
-        }
-    },
-    getList: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
-        try {
-            await new Promise((resolve) => {
-                setTimeout(resolve, 1000)
-            })
-
-            const response:any = await authFetch(() => dispatch(authThunk.checkAuth()))
-            (`${serverHttp}/api/tournament/list`, {
                 method: `GET`,
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,6 +54,34 @@ export const tournamentThunk = {
             }
 
             dispatch(TournamentActions.setEditTournamentAction(data))
+
+        } catch (error: any) {
+            console.log('error client', error)
+        } finally {
+            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
+        }
+    },
+    getList: () => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000)
+            })
+
+            const response:any = await authFetch(() => dispatch(authThunk.checkAuth()))
+            (`${serverHttp}/api/tournament/list`, {
+                method: `GET`,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            const data = await response.json()
+            if (data.error) {
+                console.log(data.message)
+                return
+            }
+
+            dispatch(TournamentActions.setTournamentListAction(data.rows))
 
         } catch (error: any) {
             console.log('error client', error)
@@ -217,6 +216,35 @@ export const tournamentThunk = {
             dispatch(TournamentActions.setEditTournamentAction(data))
             // dispatch(TournamentActions.setNewTournamentAction(null))
             dispatch(TournamentActions.setNewLogoAction(null))
+
+        } catch (error: any) {
+            console.log('error client', error)
+        } finally {
+            // dispatch(FetchingActions.setIsLoadingUserListAction(false))
+        }
+    },
+    getResultTable: (categoryId: number) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000)
+            })
+
+            const response:any = await authFetch(() => dispatch(authThunk.checkAuth()))
+            (`${serverHttp}/api/result/list?category=${categoryId}`, {
+                method: `GET`,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            const data = await response.json()
+            if (data.error) {
+                console.log(data.message)
+                return
+            }
+
+            console.log(data)
+            dispatch(TournamentActions.setResultTableAction(data))
 
         } catch (error: any) {
             console.log('error client', error)

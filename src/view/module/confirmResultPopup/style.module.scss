@@ -7,6 +7,33 @@
     font-weight: bold;
     font-size: 24px;
   }
+  .name {
+    margin-top: 20px;
+    height: 30px;
+    color: var(--grayColor);
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    span {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--blackColor);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .description {
+    margin-top: 20px;
+    min-height: 30px;
+    color: var(--grayColor);
+    font-size: 16px;
+    word-wrap: anywhere;
+    span {
+
+      color: var(--blackColor);
+    }
+  }
   .videoBlock {
     margin-top: 20px;
     background-color: black;

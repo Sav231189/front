@@ -8,10 +8,13 @@ import {Footer} from "view/module/footer";
 export const AppLayout = () => {
 
     return (
-        <div id={`AppLayout`} className={css(s.AppLayout)}>
+        <>
             <Header />
-            <Outlet/>
-            <Footer />
-        </div>
+            <div id={`AppLayout`} className={css(s.AppLayout)}>
+                <Outlet/>
+                <Footer />
+            </div>
+        </>
+
     );
 };

@@ -10,6 +10,7 @@ import {ResultActions} from "store/result/reducer/ResultReducer";
 import {useSelector} from "react-redux";
 import {getResultByIdSelector} from "store/result/selector/getResultById";
 import {getConfirmResultSelector} from "store/result/selector/getConfirmResult";
+import {resultThunk} from "store/result/thunk/resultThunk";
 
 type PropsType = {
     close: () => void
@@ -21,6 +22,8 @@ export const ConfirmResultPopup = (props: PropsType) => {
     const confirmResult = useSelector(getConfirmResultSelector)
 
     const {setConfirmResultAction} = useActions(ResultActions)
+
+    const {updateAdmin} = useActions(resultThunk)
 
     const [timeMaxValue, setTimeMaxValue] = useState<[number, number]>([0, 0])
     const [timeMinValue, setTimeMinValue] = useState<[number, number]>([0, 0])
@@ -170,10 +173,10 @@ export const ConfirmResultPopup = (props: PropsType) => {
     }
 
     const confirmResultHandler = () => {
-
+        updateAdmin(`access`)
     }
     const rejectResultHandler = () => {
-
+        updateAdmin(`reject`)
     }
 
     return (
@@ -181,6 +184,12 @@ export const ConfirmResultPopup = (props: PropsType) => {
             <div className={css(s.ConfirmResultPopup)}>
                 <div className={css(s.head)}>
                     Прием результата
+                </div>
+                <div className={css(s.name)}>
+                    Задание: <span>{result.task?.name}</span>
+                </div>
+                <div className={css(s.description)}>
+                    Описание: <span>{result.task?.description}</span>
                 </div>
                 <div className={css(s.videoBlock)}>
                     <iframe width="100%" height="304px" src={`http://www.youtube.com/embed/${getUrlYoutube(result.youtube)}`}
@@ -273,8 +282,8 @@ export const ConfirmResultPopup = (props: PropsType) => {
                     <textarea placeholder={`Введите текст`}/>
                 </div>
                 <div className={css(s.btnBox)}>
-                    <Button text={`принять`} modes={[`red`,`maxWidth`,`noRadius`]}/>
-                    <Button text={`отклонить`} modes={[`maxWidth`,`noRadius`]}/>
+                    <Button text={`принять`} modes={[`red`,`maxWidth`,`noRadius`]} click={confirmResultHandler}/>
+                    <Button text={`отклонить`} modes={[`maxWidth`,`noRadius`]} click={rejectResultHandler}/>
                 </div>
             </div>
         </Popup>

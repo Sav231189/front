@@ -1,7 +1,7 @@
 
 export type TaskType = {
     id?: number,
-    category_id: number,
+    categoryId: number,
     name: string,
     description: string,
     isOpen: boolean,
