@@ -39,8 +39,8 @@ export const ProfilePopup = (props: PropsType) => {
                 </div>
             </div>
             <div className={css(s.info)}>
-                <div className={css(s.infoItem)}>
-                    <div className={css(s.key)} onClick={() => navigateHandler(`profile`)}>Профиль</div>
+                <div className={css(s.infoItem)} onClick={() => navigateHandler(`profile`)}>
+                    <div className={css(s.key)}>Профиль</div>
                 </div>
                 <div className={css(s.infoItem)}>
                     <div className={css(s.key)}>Мои турниры</div>

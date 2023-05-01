@@ -9,7 +9,7 @@
   grid-template-rows: auto auto auto 1fr auto;
   padding: 10px;
   cursor: pointer;
-  transition: transform .4s;
+  transition: transform .2s;
   &:hover {
     transform: translateY(-5px);
     .isEditable {
@@ -110,7 +110,7 @@
     flex-direction: column;
     align-items: center;
     row-gap: 30px;
-    animation: showOpacity 0.3s linear 0s both;
+    animation: showOpacity 0.1s linear 0s both;
   }
   @media screen and (max-width: 767px) {
     max-width: calc(50vw - 30px);

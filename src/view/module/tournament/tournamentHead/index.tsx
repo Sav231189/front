@@ -45,8 +45,8 @@ export const TournamentHead = (props: PropsType) => {
                                 click={() => navigate(`/tournament/prize/${tournament.id}`)}/>
                     </div>
                     <div className={css(s.btnRow, s.oneItem)}>
-                        {!tournament.isPaidMe && <Button text={'ПРИНЯТЬ УЧАСТИЕ'} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/select/${tournament.id}`)}/>}
-                        {tournament.isPaidMe && <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.id}`)}/>}
+                        {!tournament?.paidMe?.length && <Button text={'ПРИНЯТЬ УЧАСТИЕ'} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/select/${tournament.id}`)}/>}
+                        {tournament?.paidMe?.length && <Button text={'добавить результат '} modes={[`uppercase`, `maxWidth`, `red`]} click={() => navigate(`/tournament/add/${tournament.id}`)}/>}
                     </div>
                 </div>
             </div>

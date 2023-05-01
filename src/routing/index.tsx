@@ -107,7 +107,7 @@ export const router = createBrowserRouter([
                         errorElement: <Navigate to={`/`} />,
                     },
                     {
-                        path: "category-list/:id",
+                        path: "tournament/category-list/:id",
                         element: <CategoryList />,
                         errorElement: <Navigate to={`/`} />,
                     },

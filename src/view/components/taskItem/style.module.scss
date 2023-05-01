@@ -1,4 +1,5 @@
 .TaskItem {
+  position: relative;
   margin-top: 20px;
   background: var(--primaryOpacityBtn);
   border: 1px solid #F5F5F5;
@@ -25,6 +26,9 @@
       }
       &.access {
         color: #00be00;
+      }
+      .closeAddResult {
+        color: gray;
       }
     }
   }
@@ -68,6 +72,12 @@
           input {
             width: 100px;
           }
+        }
+      }
+      &.disable {
+        pointer-events: none;
+        input {
+          background-color: #adadad;
         }
       }
     }

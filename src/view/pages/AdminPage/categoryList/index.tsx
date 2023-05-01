@@ -50,6 +50,9 @@ export const CategoryList = () => {
                         <img src={loadGif} alt="load"/>
                         <span>Загрузка...</span>
                     </div>}
+                    {categoryList !== null && !categoryList.length && <div className={css(s.emptyList)}>
+                        Нет категорий
+                    </div>}
                 </div>
             </div>
         </div>

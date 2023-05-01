@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-export const useClickOutside = (handler: Function, ignoreIdList: Array<string> = [], width?: number) => {
+export const useClickOutside = (handler: Function, ignoreIdList: Array<string> = [],dep: any[] = [], width?: number) => {
 
     const ignoredAppIdList = [`Confirm`]
 
@@ -21,5 +21,5 @@ export const useClickOutside = (handler: Function, ignoreIdList: Array<string> =
             document.removeEventListener('pointerdown', listener)
             document.removeEventListener('touchstart', listener)
         }
-    }, [])
+    }, dep)
 }

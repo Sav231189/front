@@ -1,31 +1,60 @@
 .TournamentTable {
-  //width: 100%;
   overflow-x: auto;
-  margin: 0 auto;
+  margin: 20px auto 0;
+  border: solid 1px var(--litePrimaryBg);;
 
   .table {
-    //overflow: auto;
     max-width: 1470px;
     display: grid;
     grid-template-columns: 1fr;
+    .emptyList {
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--grayColor);
+    }
+  }
+  .loadingList {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    img {
+      width: 40px;
+    }
   }
 }
 .TableHead {
-  height: 60px;
-  //width: 100%;
+  min-height: 60px;
   background-color: var(--litePrimaryBg);
   display: flex;
   div {
     background-color: var(--litePrimaryBg);
     flex: 0 0 200px;
     padding: 0 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .top {
+    flex: 0 0 100px;
   }
 }
 .TableResultItem {
   display: flex;
   min-height: 40px;
+  align-items: center;
   div {
     flex: 0 0 200px;
     padding: 0 20px;
+    text-align: center;
+  }
+  .top {
+    flex: 0 0 100px;
   }
 }

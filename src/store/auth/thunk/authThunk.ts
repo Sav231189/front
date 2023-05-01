@@ -12,13 +12,14 @@ export const authThunk = {
             const accessToken = localStorage.getItem(ACCESS_TOKEN)
             const refreshToken = localStorage.getItem(REFRESH_TOKEN)
             if (!accessToken || !refreshToken) {
-                dispatch(AuthActions.setUserAction({role: ['guest'], name: 'Гость'}))
                 localStorage.removeItem(REFRESH_TOKEN)
                 localStorage.removeItem(ACCESS_TOKEN)
+                dispatch(AuthActions.setUserAction({role: ['guest'], name: 'Гость'}))
                 return
             }
 
             await new Promise(res => setTimeout(() => res(''), delay ?? 0))
+
 
             const response = await fetch(`${serverHttp}/api/auth/refresh`, {
                 method: `POST`,
@@ -32,6 +33,7 @@ export const authThunk = {
                 console.log(data.message)
                 localStorage.removeItem(REFRESH_TOKEN)
                 localStorage.removeItem(ACCESS_TOKEN)
+                dispatch(AuthActions.setUserAction({role: ['guest'], name: 'Гость'}))
                 return
             }
 
@@ -41,12 +43,14 @@ export const authThunk = {
                 id: number
                 role: UserRoleType
                 name: string
+                confirmed: boolean
             }
 
             dispatch(AuthActions.setUserAction({
                 id: user.id,
                 name: user.name,
                 role: user.role,
+                confirmed: user.confirmed
             }))
 
         } catch (error: any) {
@@ -59,6 +63,9 @@ export const authThunk = {
         errorCallback: (str: string) => void
     }) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
+
+            await new Promise(res => setTimeout(() => res(''), 1000))
+
             const response = await fetch(`${serverHttp}/api/auth/login`, {
                 method: `POST`,
                 headers: {
@@ -99,6 +106,8 @@ export const authThunk = {
         errorCallback: (str: string) => void
     }) => async (dispatch: AppDispatch, getState: () => RootState): Promise<void> => {
         try {
+
+            await new Promise(res => setTimeout(() => res(''), 1000))
 
             const response = await fetch(`${serverHttp}/api/auth/registration`, {
                 method: `POST`,

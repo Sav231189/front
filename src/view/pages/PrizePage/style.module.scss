@@ -9,13 +9,21 @@
       .titlePage {
         margin-top: 10px;
         font-weight: 700;
-        font-size: 48px;
+        font-size: 34px;
         padding: 10px 0;
       }
       p {
         margin-top: 20px;
         font-size: 18px;
         line-height: 22px;
+      }
+      .emptyList {
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--grayColor);
       }
     }
   }

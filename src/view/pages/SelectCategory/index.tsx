@@ -40,7 +40,7 @@ export const SelectCategory = () => {
                         {categoryList?.map(category => {
                             return <CategoryItem key={category.id} category={category}/>
                         })}
-                        {categoryList?.length === 0 && <div>Нет добавленных категорий</div>}
+                        {categoryList?.length === 0 && <div>Список категорий пуст</div>}
                         {categoryList === null && <div className={css(s.loadingList)}>
                             <img src={loadGif} alt="load"/>
                             <span>Загрузка...</span>

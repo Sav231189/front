@@ -21,7 +21,7 @@ export const TournamentItem = (props: PropsType) => {
         navigate(`/admin/tournament/edit/${item.id}`)
     }
     const openAdminCategoryHandler = () => {
-        navigate(`/admin/category-list/${item.id}`)
+        navigate(`/admin/tournament/category-list/${item.id}`)
     }
     const prevPositionTournamentHandler = () => {
         console.log(`prevPositionTournamentHandler`)

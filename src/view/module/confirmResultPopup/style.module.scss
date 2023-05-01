@@ -38,8 +38,12 @@
     margin-top: 20px;
     background-color: black;
   }
-  .value {
+  .type {
     margin-top: 20px;
+    font-weight: bold;
+  }
+  .value {
+    margin-top: 10px;
     div {
       color: black;
     }
@@ -66,6 +70,12 @@
         width: 100px;
       }
     }
+    &.disable {
+      pointer-events: none;
+      input {
+        background-color: #e3e3e3;
+      }
+    }
   }
   .comment {
     margin-top: 20px;
@@ -73,7 +83,6 @@
     .subTitle {
 
     }
-
     textarea {
       margin-top: 8px;
       width: 100%;
@@ -82,6 +91,12 @@
       overflow-y: scroll;
       padding: 10px;
       border: 1px solid rgba(18, 18, 18, 0.12);
+    }
+    &.disable {
+      pointer-events: none;
+      textarea {
+        background-color: #e3e3e3;
+      }
     }
   }
   .btnBox {

@@ -5,7 +5,7 @@ import loadGif from '../../assets/images/Load.gif'
 
 type PropsType = {
     text: string
-    modes?: Array<'maxWidth'|'red'|'grey'|'uppercase'|'mobilSmall'|'noRadius'>
+    modes?: Array<'maxWidth'|'red'|'grey'|'uppercase'|'mobilSmall'|'noRadius'|'active'|''>
     click?: Function
     disable?: boolean
     isLoading?: boolean

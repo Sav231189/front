@@ -2,27 +2,27 @@
 ::-webkit-scrollbar-button {
   //background-image:url('');
   background-repeat:no-repeat;
-  width: 4px;
+  width: 8px;
   height: 8px;
   pointer-events: none;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: var(--primaryBg);
   padding: 2px;
-
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0px;
+  -webkit-border-radius: 3px;
   background-color: rgba(166, 166, 166, 0.51);
-
-  //border-radius: 3px;
+  border-radius: 5px;
   overflow: hidden;
+  border: 2px solid var(--primaryBg);
 }
 
 ::-webkit-scrollbar-thumb:hover{
-  background-color: #5463b0;
+  background-color: rgba(232, 232, 232, 0.51);
 }
 
 ::-webkit-resizer{
@@ -33,7 +33,7 @@
 }
 
 ::-webkit-scrollbar{
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
 }
 /* END Скрытие - Стилизация Скрол бара (ScrollBar) */

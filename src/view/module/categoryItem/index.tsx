@@ -42,7 +42,8 @@ export const CategoryItem = (props: PropsType) => {
             <div className={css(s.description)}>{category.description}</div>
             <div className={css(s.price)}>Цена: {category.price} Р</div>
             <div className={css(s.bayBtn)}>
-                {user && !!user.id && <Button text={`${Number(category.price) === 0 ? `Бесплатно`:`Купить`}    →`} modes={[`red`, `maxWidth`, `noRadius`]} click={buyCategoryHandler}/>}
+                {!category.isPadeMe && user && !!user.id && <Button text={`${Number(category.price) === 0 ? `Бесплатно`:`Купить`}    →`} disable={!category.isAccessBuy} modes={[`red`, `maxWidth`, `noRadius`]} click={buyCategoryHandler}/>}
+                {!!category.isPadeMe && <Button text={`Подать результаты`} modes={[`maxWidth`, `noRadius`]} click={() => navigate(`/tournament/add/${category.tournamentId}`)}/>}
                 {user && !user.id && <LoginButton text={`Войти`}/>}
                 {profile && !profile.isFilled && <Button text={'Заполнить профиль'} modes={[`uppercase`, `maxWidth`]} click={() => navigate(`/profile`)}/>}
             </div>

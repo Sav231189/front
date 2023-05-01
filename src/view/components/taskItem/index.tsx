@@ -10,6 +10,7 @@ import {getResultByIdSelector} from "store/result/selector/getResultById";
 import {InputText} from "view/components/InputText";
 import {ResultActions} from "store/result/reducer/ResultReducer";
 import {ResultType} from "types/ResultType";
+import {Skeleton} from "view/components/skeleton";
 
 type PropsType = {
     task: TaskType
@@ -198,7 +199,7 @@ export const TaskItem = (props: PropsType) => {
             <div className={css(s.title)}>
                 <div className={css(s.name)}>{task.name}</div>
                 <div className={css(s.status, s[result?.status])}>
-                    {(() => {
+                    {task.isOpen && (() => {
                         switch (result?.status) {
                             case 'new':
                                 return 'Ожидает заполнения';
@@ -212,15 +213,17 @@ export const TaskItem = (props: PropsType) => {
                                 return null
                         }
                     })()}
+                    {!task.isOpen && <span className={css(s.closeAddResult)}>Подача результатов закрыта</span>}
                 </div>
             </div>
             <div className={css(s.description)}>
                 <span>Описание: </span>{task.description}
             </div>
             <div className={css(s.main)}>
-                <div className={css(s.resultBox)}>
+                <div className={css(s.resultBox, (!task.isOpen || !result) && s.disable)}>
                     <div className={css(s.link)}>
                         <InputText change={setYoutubeHandler} modes={[`maxWidth`]}
+                                   disabled={!task.isOpen}
                                    placeholder={`https://`}
                                    value={result?.youtube ?? ''}
                                    title={!!result ? `Ссылка на видео (видео выполненного вами комплекса)` : `загрузка...`}/>
@@ -305,7 +308,7 @@ export const TaskItem = (props: PropsType) => {
                     </div>
                 </div>
                 <div className={css(s.btnBox)}>
-                    {(() => {
+                    {task.isOpen && (() => {
                         switch (result?.status) {
                             case 'new':
                                 return <Button text={`Отправить    →`} disable={!isChange}
@@ -328,6 +331,7 @@ export const TaskItem = (props: PropsType) => {
                         }
                     })()}
                 </div>
+                {!result && <Skeleton />}
             </div>
         </div>
     );

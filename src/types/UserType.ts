@@ -2,6 +2,7 @@ export type UserType = {
     id?: number
     role: UserRoleType
     name: string
+    confirmed?: boolean
 }
 
 export type UserRoleType = Array<'guest' | 'regular' | 'admin'>

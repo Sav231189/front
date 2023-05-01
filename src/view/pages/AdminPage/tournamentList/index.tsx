@@ -38,6 +38,7 @@ export const AdminTournamentList = () => {
                     <Button text={`Добавить +`} modes={[`maxWidth`,`red`]} click={() => navigate(`/admin/tournament/edit`)}/>
                 </div>
                 <div className={css(s.filter)}>
+                    <Button text={'все'} modes={[`uppercase`, `mobilSmall`, true ? `active`:``]}/>
                     <Button text={'скоро старт'} modes={[`uppercase`, `mobilSmall`]}/>
                     <Button text={'сейчас идет'} modes={[`uppercase`, `mobilSmall`]}/>
                     <Button text={'закончен'} modes={[`uppercase`, `mobilSmall`]}/>
@@ -49,6 +50,9 @@ export const AdminTournamentList = () => {
                     {tournamentList?.map((item, index) =>
                         <TournamentItem key={item.id} item={item} isEditable={true}/>
                     )}
+                    {tournamentList !== null && !tournamentList.length && <div className={css(s.emptyList)}>
+                        Список турниров пуст
+                    </div>}
                 </div>
                 {tournamentList !== null && tournamentList.length >= 12 &&
                     <div className={css(s.btnBox)}>

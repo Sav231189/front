@@ -14,7 +14,9 @@ export const IsRequireHOC = (props: PropsType): JSX.Element => {
 
     let isPermission = false
 
-    user?.role.forEach(role => isPermission = permissionRoles.includes(role))
+    user?.role.forEach(role => {
+        if (permissionRoles.includes(role)) isPermission = true
+    })
 
     return (isPermission ? children : permissionElement) as JSX.Element
 };

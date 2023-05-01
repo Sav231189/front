@@ -12,7 +12,8 @@ export const TournamentDescription = (props: PropsType) => {
             <div className={css(s.title)}>
                 О ТУРНИРЕ
             </div>
-            <div className={css(s.text)}>{text}</div>
+            {!!text.length && <div className={css(s.text)}>{text}</div>}
+            {!text.length && <div className={css(s.emptyList)}>Информация о турнире не заполнена</div>}
         </div>
     );
 };

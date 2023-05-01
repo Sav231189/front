@@ -25,6 +25,8 @@ export const ConfirmResultPopup = (props: PropsType) => {
 
     const {updateAdmin} = useActions(resultThunk)
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const [timeMaxValue, setTimeMaxValue] = useState<[number, number]>([0, 0])
     const [timeMinValue, setTimeMinValue] = useState<[number, number]>([0, 0])
     const [weightValue, setWeightValue] = useState<[number, number]>([0, 0])
@@ -172,11 +174,15 @@ export const ConfirmResultPopup = (props: PropsType) => {
         return /^https?\:\/\/(www\.)?youtu\.be/.test(url) ? url.replace(/^https?\:\/\/(www\.)?youtu\.be\/([\w-]{11}).*/,"$2") : url.replace(/.*\?v\=([\w-]{11}).*/,"$1");
     }
 
-    const confirmResultHandler = () => {
-        updateAdmin(`access`)
+    const confirmResultHandler = async () => {
+        setIsLoading(true)
+        await updateAdmin(`access`)
+        setIsLoading(false)
     }
-    const rejectResultHandler = () => {
-        updateAdmin(`reject`)
+    const rejectResultHandler = async () => {
+        setIsLoading(true)
+        await updateAdmin(`reject`)
+        setIsLoading(false)
     }
 
     return (
@@ -205,7 +211,16 @@ export const ConfirmResultPopup = (props: PropsType) => {
 
                     {/*</iframe>*/}
                 </div>
-                <div className={css(s.value)}>
+                <div className={css(s.type)}>{(()=>{
+                    switch (result.taskTypeId) {
+                        case 1: return `Минимальное время`
+                        case 2: return `Максимальное время`
+                        case 3: return `Количество`
+                        case 4: return `Вес`
+                        case 5: return `Рост`
+                    }
+                })()}</div>
+                <div className={css(s.value, isLoading && s.disable)}>
                     {!!result && (() => {
                         switch (Number(result?.taskTypeId)) {
                             case 1:
@@ -277,13 +292,13 @@ export const ConfirmResultPopup = (props: PropsType) => {
                         }
                     })()}
                 </div>
-                <div className={css(s.comment)}>
+                <div className={css(s.comment, isLoading && s.disable)}>
                     <div className={css(s.subTitle)}>Комментарий</div>
                     <textarea placeholder={`Введите текст`}/>
                 </div>
                 <div className={css(s.btnBox)}>
-                    <Button text={`принять`} modes={[`red`,`maxWidth`,`noRadius`]} click={confirmResultHandler}/>
-                    <Button text={`отклонить`} modes={[`maxWidth`,`noRadius`]} click={rejectResultHandler}/>
+                    <Button text={`принять`} isLoading={isLoading} modes={[`red`,`maxWidth`,`noRadius`]} click={confirmResultHandler}/>
+                    <Button text={`отклонить`} isLoading={isLoading} modes={[`maxWidth`,`noRadius`]} click={rejectResultHandler}/>
                 </div>
             </div>
         </Popup>

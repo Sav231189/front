@@ -18,6 +18,10 @@
     font-size: 34px;
     font-weight: bold;
   }
+  .editCategoryBtn {
+    margin-top: 20px;
+    max-width: 400px;
+  }
   .main {
     margin-top: 20px;
     display: grid;
@@ -33,6 +37,9 @@
         display: grid;
         grid-template-columns: 1fr;
         row-gap: 30px;
+      }
+      &.disable {
+        pointer-events: none;
       }
     }
     .avatar {
@@ -74,6 +81,9 @@
         .inputLogo {
           width: 0;
           height: 0;
+        }
+        &.disable {
+          pointer-events: none;
         }
       }
       @media screen and (max-width: 1500px ){

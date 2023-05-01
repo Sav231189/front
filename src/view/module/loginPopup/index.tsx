@@ -16,17 +16,18 @@ export const LoginPopup = (props: PropsType) => {
     const {close, element = document.body, mode = 'login'} = props
 
     const [currentMode, setCurrentMode] = useState(mode)
+    const [isLoading, setIsLoading] = useState(false)
 
-    useClickOutside(close, [`LoginPopup`])
+    useClickOutside(() => !isLoading && close(), [`LoginPopup`], [isLoading])
 
     return createPortal(
-            <div className={css(s.LoginPopup)}>
+            <div className={css(s.LoginPopup)} onClick={e => e.stopPropagation()}>
                 <div id={`LoginPopup`} className={css(s.main)}>
                     {currentMode === 'login'
-                        ? <Login setCurrentMode={setCurrentMode}/>
-                        : <Registration setCurrentMode={setCurrentMode}/>
+                        ? <Login setCurrentMode={setCurrentMode} isLoading={isLoading} setIsLoading={setIsLoading}/>
+                        : <Registration setCurrentMode={setCurrentMode} isLoading={isLoading} setIsLoading={setIsLoading}/>
                     }
-                    <div className={css(s.closeBtn)} onClick={() => close()}/>
+                    {!isLoading && <div className={css(s.closeBtn)} onClick={() => close()}/>}
                 </div>
             </div>
     , element);
@@ -34,9 +35,11 @@ export const LoginPopup = (props: PropsType) => {
 
 type LoginPropsType = {
     setCurrentMode: Function
+    setIsLoading: Function
+    isLoading: boolean
 }
 const Login = (props: LoginPropsType) => {
-    const {setCurrentMode} = props
+    const {setCurrentMode, isLoading, setIsLoading} = props
 
     const [data, setData] = useState<{ login: string, password: string }>({login: '', password: ''})
     const [error, setError] = useState<string|null>(null)
@@ -47,15 +50,17 @@ const Login = (props: LoginPropsType) => {
         setError(message)
     },[])
 
-    const loginHandler = (e: any) => {
+    const loginHandler = async (e: any) => {
         e.preventDefault()
-        login({
+        setIsLoading(true)
+        await login({
             data: {
                 login: data.login,
                 pswd: data.password
             },
             errorCallback: errorCallback
         })
+        setIsLoading(false)
     }
 
     const changeLoginHandler = (e) => {
@@ -72,15 +77,15 @@ const Login = (props: LoginPropsType) => {
             <div className={css(s.title)}>Вход</div>
             {error !== null && <div className={css(s.errorMessage)}>{error}</div>}
             <form onSubmit={loginHandler}>
-                <input type="text" placeholder={`Email:`} onChange={changeLoginHandler}/>
-                <input type="text" placeholder={`Пароль:`} onChange={changePasswordHandler}/>
+                <input type="text" disabled={isLoading} placeholder={`Email:`} onChange={changeLoginHandler}/>
+                <input type="text" disabled={isLoading} placeholder={`Пароль:`} onChange={changePasswordHandler}/>
                 <div className={css(s.sendBtnBox)}>
-                    <Button text={`Создать`} modes={[`maxWidth`,`red`,`noRadius`]}/>
+                    <Button text={`Войти`} modes={[`maxWidth`,`red`,`noRadius`]} isLoading={isLoading}/>
                 </div>
             </form>
             <div className={css(s.changeMode)}>
                 <span>У вас нет аккаунта?</span>
-                <span className={css(s.btn)} onClick={() => setCurrentMode('registration')}>Создать</span>
+                <span className={css(s.btn)} onClick={() => !isLoading && setCurrentMode('registration')}>Создать</span>
             </div>
         </div>
     );
@@ -88,9 +93,11 @@ const Login = (props: LoginPropsType) => {
 
 type RegistrationPropsType = {
     setCurrentMode: Function
+    setIsLoading: Function
+    isLoading: boolean
 }
 const Registration = (props: RegistrationPropsType) => {
-    const {setCurrentMode} = props
+    const {setCurrentMode, isLoading, setIsLoading} = props
 
     const [data, setData] = useState<{ login: string, password: string, confirm: string }>({login: '', password: '', confirm: ''})
     const [error, setError] = useState<string|null>(null)
@@ -101,19 +108,21 @@ const Registration = (props: RegistrationPropsType) => {
         setError(message)
     },[])
 
-    const registrationHandler = (e: any) => {
+    const registrationHandler = async (e: any) => {
         e.preventDefault()
         if (data.password !== data.confirm) {
             setError(`Пароли не совпадают`)
             return
         }
-        registration({
+        setIsLoading(true)
+        await registration({
             data: {
                 login: data.login,
                 pswd: data.password
             },
             errorCallback: errorCallback
         })
+        setIsLoading(false)
     }
     const changeLoginHandler = (e) => {
         setData(prev => ({...prev, login: e.target.value}))
@@ -133,16 +142,16 @@ const Registration = (props: RegistrationPropsType) => {
             <div className={css(s.title)}>Регистрация</div>
             {error !== null && <div className={css(s.errorMessage)}>{error}</div>}
             <form onSubmit={registrationHandler}>
-                <input type="text" placeholder={`Email:`} onChange={changeLoginHandler}/>
-                <input type="text" placeholder={`Пароль:`} onChange={changePasswordHandler}/>
-                <input type="text" placeholder={`Повторите пароль:`} onChange={changeConfirmHandler}/>
+                <input type="text" disabled={isLoading} placeholder={`Email:`} onChange={changeLoginHandler}/>
+                <input type="text" disabled={isLoading} placeholder={`Пароль:`} onChange={changePasswordHandler}/>
+                <input type="text" disabled={isLoading} placeholder={`Повторите пароль:`} onChange={changeConfirmHandler}/>
                 <div className={css(s.sendBtnBox)}>
-                    <Button text={`Создать`} modes={[`maxWidth`,`red`,`noRadius`]}/>
+                    <Button text={`Создать`} modes={[`maxWidth`,`red`,`noRadius`]} isLoading={isLoading}/>
                 </div>
             </form>
             <div className={css(s.changeMode)}>
                 <span>У вас уже есть аккаунт?</span>
-                <span className={css(s.btn)} onClick={() => setCurrentMode('login')}>Войти</span>
+                <span className={css(s.btn)} onClick={() => !isLoading && setCurrentMode('login')}>Войти</span>
             </div>
         </div>
     );

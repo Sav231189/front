@@ -8,6 +8,7 @@ import {ProfileProvider} from "provider/ProfileProvider";
 import 'view/assets/scss/clear.scss'
 import 'view/assets/scss/variables.scss'
 import 'view/assets/scss/slickSlider.scss'
+import 'view/assets/scss/scrollBar.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

@@ -9,12 +9,31 @@
       .titlePage {
         margin-top: 10px;
         font-weight: 700;
-        font-size: 38px;
+        font-size: 34px;
         padding: 10px 0;
         text-transform: uppercase;
       }
       .list {
 
+      }
+      .loadingList {
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 20px;
+        img {
+          width: 40px;
+        }
+      }
+      .emptyList {
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--grayColor);
       }
     }
   }

@@ -1,3 +1,4 @@
+import {CategoryType} from "types/CategoryType";
 
 export type TournamentType = {
     id?: number,
@@ -13,6 +14,7 @@ export type TournamentType = {
     isHidden: boolean,
     isShowTable: boolean,
 
-    isPaidMe: boolean,
+    paidMe: Array<number>,
+    categories?: Array<CategoryType>,
     categoryId?: number
 }

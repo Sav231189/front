@@ -11,4 +11,5 @@ export type CategoryType = {
     isHidden: boolean,
     price: number,
     taskList: Array<TaskType> | null
+    isPadeMe?: boolean
 }

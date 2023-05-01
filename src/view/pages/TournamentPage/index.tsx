@@ -33,8 +33,8 @@ export const TournamentPage = () => {
         <div className={css(s.TournamentPage)}>
             <div className={css(s.container)}>
                 <TournamentHead tournament={tournament}/>
-                <TournamentTable />
-                <TournamentDescription text={tournament.descriptionSmall}/>
+                {tournament.isShowTable && <TournamentTable paidMeCategoryId={tournament?.paidMe[0] ?? null}/>}
+                <TournamentDescription text={tournament.description}/>
                 {tournament.id && <TournamentPartners tournamentId={tournament.id}/>}
             </div>
         </div>

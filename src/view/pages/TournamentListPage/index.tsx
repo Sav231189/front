@@ -34,6 +34,7 @@ export const TournamentListPage = () => {
                     </div>
                 </div>
                 <div className={css(s.filter)}>
+                    <Button text={'все'} modes={[`uppercase`, `mobilSmall`, true ? `active`:``]}/>
                     <Button text={'скоро старт'} modes={[`uppercase`, `mobilSmall`]}/>
                     <Button text={'сейчас идет'} modes={[`uppercase`, `mobilSmall`]}/>
                     <Button text={'закончен'} modes={[`uppercase`, `mobilSmall`]}/>
@@ -41,10 +42,14 @@ export const TournamentListPage = () => {
                 <div className={css(s.list)}>
                     {tournamentList === null && <div className={css(s.loadingList)}>
                         <img src={loadGif} alt="load"/>
+                        Загрузка...
                     </div>}
                     {tournamentList?.map((item, index) =>
                         <TournamentItem key={index} item={item}/>
                     )}
+                    {tournamentList !== null && !tournamentList.length && <div className={css(s.emptyList)}>
+                        Список турниров пуст
+                    </div>}
                 </div>
                 {tournamentList !== null && tournamentList.length >= 12 &&
                     <div className={css(s.btnBox)}>
